@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import ImpactCounters from '@/components/homepage/impact-counters';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
-import { mockProjects } from '@/lib/mock-data';
+import { mockNews, mockProjects } from '@/lib/mock-data';
 import ProjectCard from '@/components/projects/project-card';
 import { ArrowRight, Quote } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -16,6 +16,7 @@ import {
     CarouselNext,
     CarouselPrevious,
 } from "@/components/ui/carousel"
+import ArticleCard from '@/components/news/article-card';
 
 const testimonials = [
     {
@@ -52,6 +53,7 @@ const testimonials = [
 export default function Home() {
   const heroImage = PlaceHolderImages.find(p => p.id === 'hero-community');
   const featuredProjects = mockProjects.slice(0, 3);
+  const latestNews = mockNews.slice(0, 2);
 
   return (
     <div className="flex flex-col">
@@ -152,8 +154,29 @@ export default function Home() {
         </div>
       </section>
 
-
       <section className="py-12 md:py-20 bg-background">
+        <div className="container mx-auto px-4">
+          <div className="text-center max-w-3xl mx-auto mb-12">
+            <h2 className="font-headline text-3xl md:text-4xl font-bold">Latest News</h2>
+            <p className="mt-3 text-lg text-muted-foreground">
+              Stay up-to-date with our latest activities and stories of change.
+            </p>
+          </div>
+          <div className="max-w-4xl mx-auto space-y-12">
+            {latestNews.map(article => (
+              <ArticleCard key={article.id} article={article} />
+            ))}
+          </div>
+          <div className="text-center mt-12">
+            <Button asChild variant="outline">
+              <Link href="/news">View All News <ArrowRight className="ml-2" /></Link>
+            </Button>
+          </div>
+        </div>
+      </section>
+
+
+      <section className="py-12 md:py-20 bg-secondary/50">
         <div className="container mx-auto px-4 text-center">
           <h2 className="font-headline text-3xl md:text-4xl">Ready to Make a Difference?</h2>
           <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
@@ -164,7 +187,7 @@ export default function Home() {
               <Link href="/donate">Support Our Cause</Link>
             </Button>
             <Button asChild size="lg" variant="outline">
-              <Link href="/news">Read Our News</Link>
+              <Link href="/contact">Get Involved</Link>
             </Button>
           </div>
         </div>
