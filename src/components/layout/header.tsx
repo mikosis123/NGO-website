@@ -31,7 +31,7 @@ export function Header() {
         scrolled ? "border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60" : "bg-black/20",
         "mt-4"
     )}>
-      <div className="container flex h-16 items-center">
+      <div className="container flex h-16 items-center px-4">
         <Link href="/" className="flex items-center space-x-2">
           <Logo />
         </Link>
