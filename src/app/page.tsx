@@ -112,7 +112,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-12 md:py-20 bg-secondary/30">
+      <section className="py-12 md:py-20 bg-accent text-accent-foreground">
         <div className="container mx-auto px-4">
             <div className="text-center max-w-3xl mx-auto mb-12">
                 <h2 className="font-headline text-3xl md:text-4xl font-bold">Stories from the Field</h2>
@@ -128,12 +128,12 @@ export default function Home() {
                     {testimonials.map((testimonial, index) => (
                         <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
                             <div className="p-1 h-full">
-                                <Card className="flex flex-col h-full">
+                                <Card className="flex flex-col h-full bg-background text-foreground">
                                     <CardContent className="p-6 flex-grow flex flex-col">
                                         <Quote className="w-8 h-8 text-primary mb-4" />
                                         <p className="italic text-muted-foreground flex-grow">"{testimonial.quote}"</p>
                                     </CardContent>
-                                    <CardFooter className="p-6 bg-background/50 flex items-center">
+                                    <CardFooter className="p-6 bg-secondary/30 flex items-center">
                                         <Avatar>
                                             <AvatarImage src={testimonial.image} alt={testimonial.name} data-ai-hint={testimonial.imageHint} />
                                             <AvatarFallback>{testimonial.name.charAt(0)}</AvatarFallback>
@@ -148,8 +148,8 @@ export default function Home() {
                         </CarouselItem>
                     ))}
                 </CarouselContent>
-                <CarouselPrevious />
-                <CarouselNext />
+                <CarouselPrevious className="border-accent-foreground text-accent-foreground hover:bg-accent-foreground hover:text-accent" />
+                <CarouselNext className="border-accent-foreground text-accent-foreground hover:bg-accent-foreground hover:text-accent" />
             </Carousel>
         </div>
       </section>
