@@ -4,10 +4,10 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
 import { useState, useEffect } from 'react';
-
+import Image from "next/image";
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { Logo } from '@/components/logo';
+import  {Logo}  from '@/components/logo';
 import { navLinks } from '@/lib/mock-data';
 import { cn } from '@/lib/utils';
 import type { NavLink } from '@/lib/types';
@@ -31,9 +31,9 @@ export function Header() {
         scrolled ? "border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60" : "bg-black/20",
         "mt-4"
     )}>
-      <div className="container flex h-16 items-center px-4">
+      <div className="container flex h-20 items-center px-4">
         <Link href="/" className="flex items-center space-x-2">
-          <Logo />
+        <Logo />
         </Link>
         <div className="flex-1 flex justify-center">
           <nav className="hidden md:flex items-center space-x-6 text-sm font-medium">
