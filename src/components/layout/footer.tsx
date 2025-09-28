@@ -7,12 +7,12 @@ import { navLinks } from '@/lib/mock-data';
 
 export function Footer() {
   return (
-    <footer className="border-t">
+    <footer className="bg-secondary text-secondary-foreground">
       <div className="container py-12 px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="space-y-4">
             <Logo />
-            <p className="text-muted-foreground text-sm">
+            <p className="text-sm">
               Empowering communities and creating sustainable change for a better future.
             </p>
             <div className="flex space-x-4">
