@@ -1,5 +1,4 @@
-import ArticleCard from '@/components/news/article-card';
-import { mockNews } from '@/lib/mock-data';
+import PaginatedNews from '@/components/news/paginated-news';
 
 export default function NewsPage() {
   return (
@@ -11,11 +10,7 @@ export default function NewsPage() {
         </p>
       </div>
 
-      <div className="mt-12 max-w-4xl mx-auto space-y-12">
-        {mockNews.map(article => (
-          <ArticleCard key={article.id} article={article} />
-        ))}
-      </div>
+      <PaginatedNews />
     </div>
   );
 }
