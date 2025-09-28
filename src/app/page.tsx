@@ -50,7 +50,7 @@ const testimonials = [
 
 
 export default function Home() {
-  const heroImage = PlaceHolderImages.find(p => p.id === 'hero-community-alt');
+  const heroImage = PlaceHolderImages.find(p => p.id === 'hero-community');
   const featuredProjects = mockProjects.slice(0, 3);
 
   return (
