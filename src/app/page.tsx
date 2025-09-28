@@ -2,21 +2,46 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import AiHighlights from '@/components/homepage/ai-highlights';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
 import ImpactCounters from '@/components/homepage/impact-counters';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { mockProjects } from '@/lib/mock-data';
 import ProjectCard from '@/components/projects/project-card';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Quote } from 'lucide-react';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+
+const testimonials = [
+    {
+        quote: "The new well in our village has changed everything. Our children are healthier, and we spend less time fetching water and more time on our farms.",
+        name: "Asha Devi",
+        location: "Rural Village, India",
+        image: "https://picsum.photos/seed/person1/100/100",
+        imageHint: "woman portrait"
+    },
+    {
+        quote: "I am the first person in my family to finish high school. The scholarship from EmpowerChange made my dream possible.",
+        name: "John Mwangi",
+        location: "Nairobi, Kenya",
+        image: "https://picsum.photos/seed/person2/100/100",
+        imageHint: "man portrait"
+    },
+    {
+        quote: "Volunteering for the reforestation project was a life-changing experience. Seeing the forest grow, knowing you were a part of it, is incredible.",
+        name: "Maria Rodriguez",
+        location: "Costa Rica",
+        image: "https://picsum.photos/seed/person3/100/100",
+        imageHint: "person smiling"
+    }
+]
+
 
 export default function Home() {
-  const heroImage = PlaceHolderImages.find(p => p.id === 'hero-community');
+  const heroImage = PlaceHolderImages.find(p => p.id === 'hero-community-alt');
   const featuredProjects = mockProjects.slice(0, 3);
 
   return (
     <div className="flex flex-col">
-      <section className="relative h-[60vh] min-h-[500px] w-full">
+       <section className="relative h-[60vh] min-h-[500px] w-full">
         {heroImage && (
           <Image
             src={heroImage.imageUrl}
@@ -71,21 +96,34 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-12 md:py-20">
+      <section className="py-12 md:py-20 bg-secondary/30">
         <div className="container mx-auto px-4">
-          <Card className="bg-secondary/50 border-none shadow-lg">
-            <CardHeader className="text-center">
-              <CardTitle className="font-headline text-3xl md:text-4xl">AI-Powered Story Highlights</CardTitle>
-              <CardDescription className="max-w-2xl mx-auto text-base">
-                Using AI, we analyze our latest data to bring you the most compelling stories of impact. Generate a new set of highlights to see what's new.
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <AiHighlights />
-            </CardContent>
-          </Card>
+            <div className="text-center max-w-3xl mx-auto mb-12">
+                <h2 className="font-headline text-3xl md:text-4xl font-bold">Stories from the Field</h2>
+            </div>
+            <div className="grid md:grid-cols-3 gap-8">
+                {testimonials.map((testimonial, index) => (
+                    <Card key={index} className="flex flex-col">
+                        <CardContent className="p-6 flex-grow">
+                            <Quote className="w-8 h-8 text-primary mb-4" />
+                            <p className="italic text-muted-foreground">"{testimonial.quote}"</p>
+                        </CardContent>
+                        <CardFooter className="p-6 bg-background/50 flex items-center">
+                            <Avatar>
+                                <AvatarImage src={testimonial.image} alt={testimonial.name} data-ai-hint={testimonial.imageHint} />
+                                <AvatarFallback>{testimonial.name.charAt(0)}</AvatarFallback>
+                            </Avatar>
+                            <div className="ml-4">
+                                <p className="font-bold">{testimonial.name}</p>
+                                <p className="text-sm text-muted-foreground">{testimonial.location}</p>
+                            </div>
+                        </CardFooter>
+                    </Card>
+                ))}
+            </div>
         </div>
       </section>
+
 
       <section className="py-12 md:py-20 bg-background">
         <div className="container mx-auto px-4 text-center">
