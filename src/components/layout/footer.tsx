@@ -7,12 +7,12 @@ import { navLinks } from '@/lib/mock-data';
 
 export function Footer() {
   return (
-    <footer className="bg-secondary text-secondary-foreground">
+    <footer className="bg-background border-t">
       <div className="container py-12 px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="space-y-4">
             <Logo />
-            <p className="text-sm">
+            <p className="text-sm text-muted-foreground">
               Empowering communities and creating sustainable change for a better future.
             </p>
             <div className="flex space-x-4">
@@ -23,7 +23,7 @@ export function Footer() {
             </div>
           </div>
           <div>
-            <h3 className="font-semibold mb-4">Quick Links</h3>
+            <h3 className="font-semibold mb-4 text-foreground">Quick Links</h3>
             <ul className="space-y-2">
               {navLinks.map(link => (
                 <li key={link.href}>
@@ -33,7 +33,7 @@ export function Footer() {
             </ul>
           </div>
           <div>
-            <h3 className="font-semibold mb-4">Get Involved</h3>
+            <h3 className="font-semibold mb-4 text-foreground">Get Involved</h3>
             <ul className="space-y-2">
               <li><Link href="/donate" className="text-sm text-muted-foreground hover:text-primary">Donate</Link></li>
               <li><Link href="/contact#volunteer" className="text-sm text-muted-foreground hover:text-primary">Volunteer</Link></li>
@@ -41,7 +41,7 @@ export function Footer() {
             </ul>
           </div>
           <div>
-            <h3 className="font-semibold mb-4">Stay Updated</h3>
+            <h3 className="font-semibold mb-4 text-foreground">Stay Updated</h3>
             <p className="text-sm text-muted-foreground mb-2">Subscribe to our newsletter for the latest news and updates.</p>
             <form className="flex space-x-2">
               <Input type="email" placeholder="Your email" className="bg-background" />
