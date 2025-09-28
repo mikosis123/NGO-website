@@ -10,7 +10,7 @@ export function Logo({ className }: { className?: string }) {
         src={MainLogo}   // path inside public/
         alt="LFG Logo"
         width={100}
-        height={90}
+        height={80}
       />
     </div>
   );
