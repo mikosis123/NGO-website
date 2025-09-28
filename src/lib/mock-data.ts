@@ -1,7 +1,7 @@
 
 import type { Project, NewsArticle, TeamMember, ImpactMetric, NavLink } from './types';
 import { PlaceHolderImages } from './placeholder-images';
-import { Users, Briefcase, Calendar, Globe } from 'lucide-react';
+import { Users, Briefcase, Calendar, Globe, Water, GraduationCap, School, Sprout } from 'lucide-react';
 
 function findImage(id: string) {
   const image = PlaceHolderImages.find(p => p.id === id);
@@ -76,6 +76,58 @@ export const mockProjects: Project[] = [
     beneficiaries: '10,000+ individuals annually',
     timeline: '2019 - Present',
   },
+  {
+    id: '5',
+    slug: 'clean-water-access',
+    title: 'Clean Water Access Program',
+    category: 'Health',
+    description: 'Constructing wells and water purification systems in arid regions.',
+    longDescription: 'Access to clean water is a fundamental human right. This project focuses on drilling new boreholes, repairing existing wells, and installing low-cost water filtration systems to provide safe drinking water and reduce waterborne diseases.',
+    imageUrl: findImage('news-article-1').url,
+    imageHint: findImage('news-article-1').hint,
+    goals: ['Build 20 new wells', 'Provide clean water to 15,000 people', 'Train local water management committees'],
+    beneficiaries: '25 rural communities',
+    timeline: '2023 - Present',
+  },
+  {
+    id: '6',
+    slug: 'girls-education-scholarship',
+    title: 'Girls\' Education Scholarship',
+    category: 'Youth',
+    description: 'Funding scholarships for girls to complete their secondary education.',
+    longDescription: 'This program provides scholarships that cover tuition, uniforms, and school supplies for girls from low-income families, empowering them to complete their education and break the cycle of poverty.',
+    imageUrl: 'https://picsum.photos/seed/project6/600/400',
+    imageHint: 'girls school',
+    goals: ['Support 200 girls through secondary school', 'Achieve a 95% graduation rate', 'Provide mentorship and career guidance'],
+    beneficiaries: '200 adolescent girls',
+    timeline: '2022 - Present',
+  },
+  {
+    id: '7',
+    slug: 'school-building-initiative',
+    title: 'Rural School Building Initiative',
+    category: 'Youth',
+    description: 'Constructing and equipping primary schools in remote villages.',
+    longDescription: 'We build safe, weather-resistant schools to replace dilapidated structures, creating a conducive learning environment for children. Each school is equipped with desks, books, and basic supplies.',
+    imageUrl: 'https://picsum.photos/seed/project7/600/400',
+    imageHint: 'school building',
+    goals: ['Build 5 new primary schools', 'Provide quality education facilities for 1,000 children', 'Increase school enrollment by 50%'],
+    beneficiaries: '1,000 primary school students',
+    timeline: '2023 - 2025',
+  },
+  {
+    id: '8',
+    slug: 'micro-gardens-for-nutrition',
+    title: 'Urban Micro-Gardens for Nutrition',
+    category: 'Agriculture',
+    description: 'Helping families in urban slums grow their own nutritious food in small spaces.',
+    longDescription: 'This project introduces vertical and container gardening techniques to families living in crowded urban areas. We provide seeds, soil, and training to help them grow vegetables, improving nutrition and food security.',
+    imageUrl: 'https://picsum.photos/seed/project8/600/400',
+    imageHint: 'urban garden',
+    goals: ['Establish 500 micro-gardens', 'Improve dietary diversity for 500 families', 'Promote community-based food systems'],
+    beneficiaries: '500 urban families',
+    timeline: '2024 - Present',
+  }
 ];
 
 export const mockNews: NewsArticle[] = [
