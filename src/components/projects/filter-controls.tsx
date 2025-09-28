@@ -11,7 +11,7 @@ type FilterControlsProps = {
   categories: string[];
 };
 
-const PROJECTS_PER_PAGE = 6;
+const PROJECTS_PER_PAGE = 4;
 
 export default function FilterControls({ categories }: FilterControlsProps) {
   const [activeCategory, setActiveCategory] = useState('All');
@@ -57,7 +57,7 @@ export default function FilterControls({ categories }: FilterControlsProps) {
         ))}
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-8">
         {currentProjects.map(project => (
           <ProjectCard key={project.id} project={project} />
         ))}
