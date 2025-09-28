@@ -7,6 +7,12 @@ export default function ImpactCounters() {
   return (
     <section className="bg-secondary/50 py-12 md:py-16">
       <div className="container mx-auto px-4">
+        <div className="text-center max-w-3xl mx-auto mb-12">
+            <h2 className="font-headline text-3xl md:text-4xl font-bold">Our Impact in Numbers</h2>
+            <p className="mt-3 text-lg text-muted-foreground">
+                Together, we're making a measurable difference in communities around the world.
+            </p>
+        </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
           {mockImpactMetrics.map((metric) => (
             <div key={metric.label}>
