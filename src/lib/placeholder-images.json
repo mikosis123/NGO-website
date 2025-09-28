@@ -2,9 +2,9 @@
   "placeholderImages": [
     {
       "id": "hero-community",
-      "description": "A group of children in a village, representing community and hope.",
-      "imageUrl": "https://images.unsplash.com/photo-1547496614-54c41a874906?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxwb3ZlcnR5JTIwY2hpbGRyZW58ZW58MHx8fHwxNzU5MTE0MzYyfDA&ixlib=rb-4.0.3&q=80&w=1080",
-      "imageHint": "poor people"
+      "description": "A family that needs help.",
+      "imageUrl": "https://images.unsplash.com/photo-1629838029515-5a5075d9c241?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxwb29yJTIwZmFtaWx5fGVufDB8fHx8MTc1OTExNDgwNHww&ixlib=rb-4.0.3&q=80&w=1080",
+      "imageHint": "family help"
     },
     {
       "id": "about-hero",
