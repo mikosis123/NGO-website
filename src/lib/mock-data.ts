@@ -1,3 +1,4 @@
+
 import type { Project, NewsArticle, TeamMember, ImpactMetric, NavLink } from './types';
 import { PlaceHolderImages } from './placeholder-images';
 import { Users, Briefcase, Calendar, Globe } from 'lucide-react';
@@ -97,6 +98,66 @@ export const mockNews: NewsArticle[] = [
     imageUrl: findImage('news-article-2').url,
     imageHint: findImage('news-article-2').hint,
     date: '2024-04-15',
+  },
+   {
+    id: '3',
+    slug: 'reforestation-drive-surpasses-goal',
+    title: 'Reforestation Drive Surpasses Goal, Plants 20,000 Trees',
+    excerpt: 'An incredible turnout of volunteers helped us exceed our goal for the annual tree-planting event, contributing to a greener and healthier planet.',
+    content: 'Over a single weekend, more than 500 volunteers from all walks of life came together to plant 20,000 native saplings in the Green Valley region. This effort is part of our long-term commitment to restoring local forests, which are vital for biodiversity and clean air. The enthusiasm and dedication of our community were truly inspiring and have made a lasting impact on the environment.',
+    imageUrl: findImage('project-environment').url,
+    imageHint: findImage('project-environment').hint,
+    date: '2024-03-22',
+  },
+  {
+    id: '4',
+    slug: 'new-partnership-for-digital-literacy',
+    title: 'New Partnership to Expand Digital Literacy for Adults',
+    excerpt: 'Empower Change is thrilled to announce a new partnership with TechForward to provide digital literacy workshops for adults in underserved communities.',
+    content: 'In today\'s digital world, computer skills are more important than ever. This new partnership with TechForward will allow us to offer free workshops on basic computing, internet safety, and online job searching. Our goal is to bridge the digital divide and empower adults with the confidence and skills needed to succeed in the modern workforce.',
+    imageUrl: findImage('project-youth-education').url,
+    imageHint: findImage('project-youth-education').hint,
+    date: '2024-02-18',
+  },
+  {
+    id: '5',
+    slug: 'health-fair-reaches-over-1000-families',
+    title: 'Annual Health Fair Provides Vital Services to Over 1,000 Families',
+    excerpt: 'Our annual Community Health Fair was a resounding success, offering free health screenings, vaccinations, and wellness education to local families.',
+    content: 'The fair provided a one-stop shop for essential health services, including blood pressure checks, dental exams, and flu shots. We are grateful to our team of volunteer doctors, nurses, and dentists who dedicated their time and expertise to make this event possible. It\'s a critical part of our mission to ensure everyone has access to quality healthcare.',
+    imageUrl: findImage('project-health-clinic').url,
+    imageHint: findImage('project-health-clinic').hint,
+    date: '2024-01-30',
+  },
+    {
+    id: '6',
+    slug: 'youth-sports-program-launch',
+    title: 'Youth Sports Program Kicks Off with Community Support',
+    excerpt: 'A new after-school sports program has been launched to provide a safe and healthy outlet for local youth, thanks to community donations.',
+    content: 'The new soccer and basketball leagues are already a huge hit, with over 100 children signed up. These programs are not just about physical activity; they teach valuable life skills like teamwork, discipline, and sportsmanship. We believe in the power of sport to build character and create a positive environment for kids to thrive.',
+    imageUrl: 'https://picsum.photos/seed/news6/600/400',
+    imageHint: 'children playing soccer',
+    date: '2023-12-10',
+  },
+  {
+    id: '7',
+    slug: 'disaster-relief-efforts-mobilized',
+    title: 'Disaster Relief Efforts Mobilized for Flood Victims',
+    excerpt: 'In response to the recent flash floods, Empower Change has deployed a rapid response team to provide emergency aid and support to affected families.',
+    content: 'Our teams are on the ground distributing clean water, food, and temporary shelter to those who have lost their homes. We are working closely with local authorities to coordinate relief efforts and ensure that aid reaches those most in need. Your donations are critical in helping us provide immediate assistance during this difficult time.',
+    imageUrl: 'https://picsum.photos/seed/news7/600/400',
+    imageHint: 'disaster relief',
+    date: '2023-11-05',
+  },
+  {
+    id: '8',
+    slug: 'artisan-cooperative-expands-market-reach',
+    title: 'Local Artisan Cooperative Expands Market Reach',
+    excerpt: 'The women\'s artisan cooperative we support has successfully launched an online store, bringing their beautiful, handcrafted goods to a global audience.',
+    content: 'This new e-commerce platform is a game-changer for the artisans, providing them with a sustainable income and economic independence. Empower Change provided the training and resources needed to get the online store up and running. We are incredibly proud of their entrepreneurial spirit and the beautiful products they create.',
+    imageUrl: 'https://picsum.photos/seed/news8/600/400',
+    imageHint: 'handcrafted goods',
+    date: '2023-10-21',
   },
 ];
 
