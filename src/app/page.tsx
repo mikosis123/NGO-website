@@ -2,13 +2,20 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
+import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import ImpactCounters from '@/components/homepage/impact-counters';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { mockProjects } from '@/lib/mock-data';
 import ProjectCard from '@/components/projects/project-card';
 import { ArrowRight, Quote } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import {
+    Carousel,
+    CarouselContent,
+    CarouselItem,
+    CarouselNext,
+    CarouselPrevious,
+} from "@/components/ui/carousel"
 
 const testimonials = [
     {
@@ -31,6 +38,13 @@ const testimonials = [
         location: "Costa Rica",
         image: "https://picsum.photos/seed/person3/100/100",
         imageHint: "person smiling"
+    },
+    {
+        quote: "The vocational training gave me the skills to start my own business. I can now provide for my family with dignity.",
+        name: "Samuel Chen",
+        location: "Urban Center, SE Asia",
+        image: "https://picsum.photos/seed/person4/100/100",
+        imageHint: "man smiling"
     }
 ]
 
@@ -101,26 +115,40 @@ export default function Home() {
             <div className="text-center max-w-3xl mx-auto mb-12">
                 <h2 className="font-headline text-3xl md:text-4xl font-bold">Stories from the Field</h2>
             </div>
-            <div className="grid md:grid-cols-3 gap-8">
-                {testimonials.map((testimonial, index) => (
-                    <Card key={index} className="flex flex-col">
-                        <CardContent className="p-6 flex-grow">
-                            <Quote className="w-8 h-8 text-primary mb-4" />
-                            <p className="italic text-muted-foreground">"{testimonial.quote}"</p>
-                        </CardContent>
-                        <CardFooter className="p-6 bg-background/50 flex items-center">
-                            <Avatar>
-                                <AvatarImage src={testimonial.image} alt={testimonial.name} data-ai-hint={testimonial.imageHint} />
-                                <AvatarFallback>{testimonial.name.charAt(0)}</AvatarFallback>
-                            </Avatar>
-                            <div className="ml-4">
-                                <p className="font-bold">{testimonial.name}</p>
-                                <p className="text-sm text-muted-foreground">{testimonial.location}</p>
+            <Carousel
+                opts={{
+                    align: "start",
+                    loop: true,
+                }}
+                className="w-full max-w-4xl mx-auto"
+            >
+                <CarouselContent>
+                    {testimonials.map((testimonial, index) => (
+                        <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
+                            <div className="p-1 h-full">
+                                <Card className="flex flex-col h-full">
+                                    <CardContent className="p-6 flex-grow flex flex-col">
+                                        <Quote className="w-8 h-8 text-primary mb-4" />
+                                        <p className="italic text-muted-foreground flex-grow">"{testimonial.quote}"</p>
+                                    </CardContent>
+                                    <CardFooter className="p-6 bg-background/50 flex items-center">
+                                        <Avatar>
+                                            <AvatarImage src={testimonial.image} alt={testimonial.name} data-ai-hint={testimonial.imageHint} />
+                                            <AvatarFallback>{testimonial.name.charAt(0)}</AvatarFallback>
+                                        </Avatar>
+                                        <div className="ml-4">
+                                            <p className="font-bold">{testimonial.name}</p>
+                                            <p className="text-sm text-muted-foreground">{testimonial.location}</p>
+                                        </div>
+                                    </CardFooter>
+                                </Card>
                             </div>
-                        </CardFooter>
-                    </Card>
-                ))}
-            </div>
+                        </CarouselItem>
+                    ))}
+                </CarouselContent>
+                <CarouselPrevious />
+                <CarouselNext />
+            </Carousel>
         </div>
       </section>
 
