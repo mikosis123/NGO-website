@@ -2,9 +2,9 @@
   "placeholderImages": [
     {
       "id": "hero-community",
-      "description": "A family that needs help.",
-      "imageUrl": "https://images.unsplash.com/photo-1629838029515-5a5075d9c241?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxwb29yJTIwZmFtaWx5fGVufDB8fHx8MTc1OTExNDgwNHww&ixlib=rb-4.0.3&q=80&w=1080",
-      "imageHint": "family help"
+      "description": "A group of happy people in a community setting.",
+      "imageUrl": "https://images.unsplash.com/photo-1625246433906-6cfa33544b31?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxjb21tdW5pdHklMjBnYXRoZXJpbmd8ZW58MHx8fHwxNzU5MDQ5MTg3fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "community gathering"
     },
     {
       "id": "about-hero",
@@ -69,7 +69,7 @@
     {
       "id": "donor-testimonial",
       "description": "A smiling donor.",
-      "imageUrl": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxoYXBweSUyMHBlcnNvbnxlbnwwfHx8fDE3NTkwMjUyMzF8MA&ixlib=rb-4.0.3&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxoYXBweSUyMHBlcnNvbnxlbnwwfHx8fDE3NTkwMjUyMzF8MA&ixlib.rb-4.0.3&q=80&w=1080",
       "imageHint": "happy person"
     }
   ]
