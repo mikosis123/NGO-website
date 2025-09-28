@@ -28,7 +28,7 @@ export function Header() {
   return (
     <header className={cn(
         "fixed top-0 left-1/2 -translate-x-1/2 z-50 w-[85%] transition-all duration-300 rounded-lg",
-        scrolled ? "border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60" : "bg-black/20",
+        scrolled ? "border-b bg-white" : "bg-white",
         "mt-4"
     )}>
       <div className="container flex h-20 items-center px-4">
@@ -43,7 +43,7 @@ export function Header() {
                 href={link.href}
                 className={cn(
                   'transition-colors hover:text-primary',
-                  pathname === link.href ? 'text-primary' : (scrolled ? 'text-foreground/60' : 'text-white/80 hover:text-white')
+                  pathname === link.href ? 'text-primary' : 'text-foreground/60'
                 )}
               >
                 {link.label}
@@ -57,7 +57,7 @@ export function Header() {
           </Button>
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>
-              <Button variant="ghost" className={cn("md:hidden", !scrolled && "text-white hover:text-white hover:bg-white/10")}>
+              <Button variant="ghost" className={cn("md:hidden", "text-foreground hover:text-foreground hover:bg-black/10")}>
                 <Menu className="h-6 w-6" />
                 <span className="sr-only">Open Menu</span>
               </Button>
