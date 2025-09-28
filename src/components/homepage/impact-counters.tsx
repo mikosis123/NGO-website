@@ -16,6 +16,7 @@ export default function ImpactCounters() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
           {mockImpactMetrics.map((metric) => (
             <div key={metric.label}>
+              <metric.icon className="h-10 w-10 text-primary mx-auto mb-3" />
               <p className="font-headline text-4xl md:text-5xl font-bold text-primary">
                 <CountUp
                   end={parseInt(metric.value.replace(/[^0-9]/g, ''), 10)}

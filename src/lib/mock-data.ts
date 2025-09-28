@@ -1,5 +1,6 @@
 import type { Project, NewsArticle, TeamMember, ImpactMetric, NavLink } from './types';
 import { PlaceHolderImages } from './placeholder-images';
+import { Users, Briefcase, Calendar, Globe } from 'lucide-react';
 
 function findImage(id: string) {
   const image = PlaceHolderImages.find(p => p.id === id);
@@ -15,10 +16,10 @@ export const navLinks: NavLink[] = [
 ];
 
 export const mockImpactMetrics: ImpactMetric[] = [
-  { value: '1,000+', label: 'Beneficiaries' },
-  { value: '50+', label: 'Projects Completed' },
-  { value: '20', label: 'Years of Service' },
-  { value: '15', label: 'Countries Reached' },
+  { value: '1,000+', label: 'Beneficiaries', icon: Users },
+  { value: '50+', label: 'Projects Completed', icon: Briefcase },
+  { value: '20', label: 'Years of Service', icon: Calendar },
+  { value: '15', label: 'Countries Reached', icon: Globe },
 ];
 
 export const mockProjects: Project[] = [

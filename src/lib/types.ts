@@ -39,6 +39,7 @@ export type TeamMember = {
 export type ImpactMetric = {
   value: string;
   label: string;
+  icon: React.ComponentType<{ className?: string }>;
 };
 
 export type Event = {
