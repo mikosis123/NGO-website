@@ -112,7 +112,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-12 md:py-20 bg-accent text-accent-foreground">
+      <section className="py-12 md:py-20 bg-accent/20">
         <div className="container mx-auto px-4">
             <div className="text-center max-w-3xl mx-auto mb-12">
                 <h2 className="font-headline text-3xl md:text-4xl font-bold">Stories from the Field</h2>
@@ -148,8 +148,8 @@ export default function Home() {
                         </CarouselItem>
                     ))}
                 </CarouselContent>
-                <CarouselPrevious className="border-accent-foreground text-accent-foreground hover:bg-accent-foreground hover:text-accent" />
-                <CarouselNext className="border-accent-foreground text-accent-foreground hover:bg-accent-foreground hover:text-accent" />
+                <CarouselPrevious className="border-accent bg-white text-accent hover:bg-accent hover:text-accent-foreground" />
+                <CarouselNext className="border-accent bg-white text-accent hover:bg-accent hover:text-accent-foreground" />
             </Carousel>
         </div>
       </section>
