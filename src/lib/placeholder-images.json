@@ -1,3 +1,70 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "hero-community",
+      "description": "A vibrant community gathering, showing happy people collaborating.",
+      "imageUrl": "https://images.unsplash.com/photo-1632580254134-94c4a73dab76?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxjb21tdW5pdHklMjBnYXRoZXJpbmd8ZW58MHx8fHwxNzU5MDQ5MTg3fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "community gathering"
+    },
+    {
+      "id": "project-agriculture",
+      "description": "Farmers working in a lush green field.",
+      "imageUrl": "https://images.unsplash.com/photo-1515150144380-bca9f1650ed9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxzdXN0YWluYWJsZSUyMGFncmljdWx0dXJlfGVufDB8fHx8MTc1OTA1MTUwMnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "sustainable agriculture"
+    },
+    {
+      "id": "project-youth-education",
+      "description": "Young students learning in an outdoor classroom setting.",
+      "imageUrl": "https://images.unsplash.com/photo-1743329557386-d761e3134d91?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHx5b3V0aCUyMGVkdWNhdGlvbnxlbnwwfHx8fDE3NTkwNTE1MDJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "youth education"
+    },
+    {
+      "id": "project-environment",
+      "description": "Volunteers planting trees in a reforestation project.",
+      "imageUrl": "https://images.unsplash.com/photo-1733766903731-d171d1c1b0ec?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxyZWZvcmVzdGF0aW9uJTIwcHJvamVjdHxlbnwwfHx8fDE3NTkwNTE1MDJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "reforestation project"
+    },
+    {
+      "id": "project-health-clinic",
+      "description": "A nurse checking a child's health in a clean, modest clinic.",
+      "imageUrl": "https://images.unsplash.com/photo-1715810491182-725428245fe2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxjb21tdW5pdHklMjBoZWFsdGh8ZW58MHx8fHwxNzU5MDEzODU5fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "community health"
+    },
+    {
+      "id": "team-member-1",
+      "description": "Portrait of the organization's CEO.",
+      "imageUrl": "https://images.unsplash.com/photo-1595211877493-41a4e5f236b3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxwcm9mZXNzaW9uYWwlMjBwb3J0cmFpdHxlbnwwfHx8fDE3NTkwMzU5Mjd8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "professional portrait"
+    },
+    {
+      "id": "team-member-2",
+      "description": "Portrait of the Programs Director.",
+      "imageUrl": "https://images.unsplash.com/photo-1652471943570-f3590a4e52ed?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxwcm9mZXNzaW9uYWwlMjBoZWFkc2hvdHxlbnwwfHx8fDE3NTkwMjE3MTl8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "professional headshot"
+    },
+    {
+      "id": "team-member-3",
+      "description": "Portrait of the Lead Field Coordinator.",
+      "imageUrl": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHx3b21hbiUyMHNtaWxpbmd8ZW58MHx8fHwxNzU4OTgzNjk3fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "woman smiling"
+    },
+    {
+      "id": "news-article-1",
+      "description": "A new water well being celebrated by a community.",
+      "imageUrl": "https://images.unsplash.com/photo-1538300342682-cf57afb97285?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxjbGVhbiUyMHdhdGVyfGVufDB8fHx8MTc1ODk3Nzg1MHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "clean water"
+    },
+    {
+      "id": "news-article-2",
+      "description": "Graduation ceremony for a vocational training program.",
+      "imageUrl": "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxncmFkdWF0aW9uJTIwY2VyZW1vbnl8ZW58MHx8fHwxNzU4OTUxMjAzfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "graduation ceremony"
+    },
+    {
+      "id": "donor-testimonial",
+      "description": "A smiling donor.",
+      "imageUrl": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxoYXBweSUyMHBlcnNvbnxlbnwwfHx8fDE3NTkwMjUyMzF8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "happy person"
+    }
+  ]
 }
