@@ -21,29 +21,29 @@ import ArticleCard from '@/components/news/article-card';
 const testimonials = [
     {
         quote: "The new well in our village has changed everything. Our children are healthier, and we spend less time fetching water and more time on our farms.",
-        name: "Asha Devi",
-        location: "Rural Village, India",
+        name: "Abebe Tadesse",
+        location: "Rural Village, Ethiopia",
         image: "https://picsum.photos/seed/person1/100/100",
         imageHint: "woman portrait"
     },
     {
-        quote: "I am the first person in my family to finish high school. The scholarship from EmpowerChange made my dream possible.",
-        name: "John Mwangi",
-        location: "Nairobi, Kenya",
+        quote: "I am the first person in my family to finish high school. The scholarship from Light for Generation Ethiopia made my dream possible.",
+        name: "Fatuma Kedir",
+        location: "Addis Ababa, Ethiopia",
         image: "https://picsum.photos/seed/person2/100/100",
         imageHint: "man portrait"
     },
     {
         quote: "Volunteering for the reforestation project was a life-changing experience. Seeing the forest grow, knowing you were a part of it, is incredible.",
         name: "Maria Rodriguez",
-        location: "Costa Rica",
+        location: "Oromia Region, Ethiopia",
         image: "https://picsum.photos/seed/person3/100/100",
         imageHint: "person smiling"
     },
     {
         quote: "The vocational training gave me the skills to start my own business. I can now provide for my family with dignity.",
         name: "Samuel Chen",
-        location: "Urban Center, SE Asia",
+        location: "Dire Dawa, Ethiopia",
         image: "https://picsum.photos/seed/person4/100/100",
         imageHint: "man smiling"
     }
@@ -71,12 +71,10 @@ export default function Home() {
         <div className="absolute inset-0 bg-black/50" />
         <div className="relative z-10 flex h-full flex-col items-center justify-center text-center text-white p-4">
           <h1 className="font-headline text-4xl md:text-6xl font-bold !leading-tight">
-            Empowering Communities,
-            <br />
-            Changing Lives
+            Light for Generation Ethiopia
           </h1>
           <p className="mt-4 max-w-2xl text-lg md:text-xl text-slate-200">
-            Join us in our mission to create sustainable change through community-driven projects in health, education, and environmental protection.
+            Join us in our mission to create sustainable change in Ethiopia through community-driven projects in health, education, and environmental protection.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-4">
             <Button asChild size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground">
@@ -97,7 +95,7 @@ export default function Home() {
             <div className="prose prose-lg max-w-none">
               <h2 className="font-headline text-3xl md:text-4xl">Featured Projects</h2>
               <p>
-                Discover our latest initiatives and see how we're making a difference on the ground. Each project is a step towards a brighter, more equitable future.
+                Discover our latest initiatives in Ethiopia and see how we're making a difference on the ground. Each project is a step towards a brighter, more equitable future.
               </p>
               <Button asChild className="mt-4 bg-primary hover:bg-primary/90 text-primary-foreground">
                 <Link href="/projects">View All Projects <ArrowRight className="ml-2" /></Link>
@@ -159,7 +157,7 @@ export default function Home() {
           <div className="text-center max-w-3xl mx-auto mb-12">
             <h2 className="font-headline text-3xl md:text-4xl font-bold">Latest News</h2>
             <p className="mt-3 text-lg text-muted-foreground">
-              Stay up-to-date with our latest activities and stories of change.
+              Stay up-to-date with our latest activities and stories of change from Ethiopia.
             </p>
           </div>
           <div className="max-w-4xl mx-auto space-y-12">
@@ -180,7 +178,7 @@ export default function Home() {
         <div className="container mx-auto px-4 text-center">
           <h2 className="font-headline text-3xl md:text-4xl">Ready to Make a Difference?</h2>
           <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
-            Your support is crucial to our work. Whether you donate, volunteer, or spread the word, you are a part of the change.
+            Your support is crucial to our work in Ethiopia. Whether you donate, volunteer, or spread the word, you are a part of the change.
           </p>
           <div className="mt-8 flex justify-center gap-4">
             <Button asChild size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground">

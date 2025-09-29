@@ -5,8 +5,8 @@ import { Footer } from '@/components/layout/footer';
 import { Toaster } from '@/components/ui/toaster';
 
 export const metadata: Metadata = {
-  title: 'Empower Change',
-  description: 'A non-profit organization dedicated to making a positive impact on the world.',
+  title: 'Light for Generation Ethiopia',
+  description: 'A non-profit organization dedicated to making a positive impact in Ethiopia.',
 };
 
 export default function RootLayout({

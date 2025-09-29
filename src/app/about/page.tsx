@@ -22,9 +22,9 @@ export default function AboutPage() {
         )}
         <div className="absolute inset-0 bg-black/60" />
         <div className="relative z-10 text-center max-w-3xl mx-auto px-4">
-            <h1 className="font-headline text-4xl md:text-5xl font-bold text-white">About Empower Change</h1>
+            <h1 className="font-headline text-4xl md:text-5xl font-bold text-white">About Light for Generation Ethiopia</h1>
             <p className="mt-4 text-lg md:text-xl text-slate-200">
-            We are a dedicated team of professionals, volunteers, and partners committed to creating lasting, positive change in communities around the world.
+            We are a dedicated team of professionals, volunteers, and partners committed to creating lasting, positive change in communities throughout Ethiopia.
             </p>
         </div>
       </section>
@@ -33,11 +33,11 @@ export default function AboutPage() {
         <div className="grid md:grid-cols-3 gap-8 text-center">
             <div>
             <h2 className="font-headline text-3xl font-semibold">Our Mission</h2>
-            <p className="mt-2 text-muted-foreground">To empower vulnerable communities through sustainable development projects in health, education, and environmental conservation.</p>
+            <p className="mt-2 text-muted-foreground">To empower vulnerable communities in Ethiopia through sustainable development projects in health, education, and environmental conservation.</p>
             </div>
             <div>
             <h2 className="font-headline text-3xl font-semibold">Our Vision</h2>
-            <p className="mt-2 text-muted-foreground">A world where every individual has the opportunity to achieve their full potential and live with dignity and hope.</p>
+            <p className="mt-2 text-muted-foreground">A world where every Ethiopian has the opportunity to achieve their full potential and live with dignity and hope.</p>
             </div>
             <div>
             <h2 className="font-headline text-3xl font-semibold">Our Values</h2>

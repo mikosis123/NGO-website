@@ -13,7 +13,7 @@ export function Footer() {
           <div className="space-y-4">
             <Logo />
             <p className="text-sm text-muted-foreground">
-              Empowering communities and creating sustainable change for a better future.
+              Empowering communities in Ethiopia and creating sustainable change for a better future.
             </p>
             <div className="flex space-x-4">
               <Link href="#" className="text-muted-foreground hover:text-primary"><Twitter size={20} /></Link>
@@ -42,7 +42,7 @@ export function Footer() {
           </div>
           <div>
             <h3 className="font-semibold mb-4 text-foreground">Stay Updated</h3>
-            <p className="text-sm text-muted-foreground mb-2">Subscribe to our newsletter for the latest news and updates.</p>
+            <p className="text-sm text-muted-foreground mb-2">Subscribe to our newsletter for the latest news and updates from Ethiopia.</p>
             <form className="flex space-x-2">
               <Input type="email" placeholder="Your email" className="bg-background" />
               <Button type="submit" className="bg-primary text-primary-foreground hover:bg-primary/90">Subscribe</Button>
@@ -50,7 +50,7 @@ export function Footer() {
           </div>
         </div>
         <div className="mt-8 pt-8 border-t text-center text-sm text-muted-foreground">
-          <p>&copy; {new Date().getFullYear()} Empower Change. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Light for Generation Ethiopia. All rights reserved.</p>
           <p className="mt-1">
             <Link href="/privacy" className="hover:text-primary">Privacy Policy</Link> | <Link href="/terms" className="hover:text-primary">Terms of Service</Link>
           </p>
