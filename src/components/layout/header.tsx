@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Heart } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import Image from "next/image";
 import { Button } from '@/components/ui/button';
@@ -52,8 +52,11 @@ export function Header() {
           </nav>
         </div>
         <div className="flex items-center justify-end space-x-4">
-          <Button asChild className="hidden md:inline-flex bg-accent hover:bg-accent/90 text-accent-foreground">
-            <Link href="/donate">Donate</Link>
+          <Button asChild className="hidden md:inline-flex bg-accent hover:bg-accent/90 text-accent-foreground animate-pulse">
+            <Link href="/donate">
+                <Heart className="mr-2 h-4 w-4" />
+                Donate
+            </Link>
           </Button>
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>
@@ -85,8 +88,11 @@ export function Header() {
                   </Link>
                 ))}
               </nav>
-              <Button asChild className="w-full mt-8 bg-accent hover:bg-accent/90 text-accent-foreground">
-                <Link href="/donate" onClick={() => setIsOpen(false)}>Donate</Link>
+              <Button asChild className="w-full mt-8 bg-accent hover:bg-accent/90 text-accent-foreground animate-pulse">
+                <Link href="/donate" onClick={() => setIsOpen(false)}>
+                    <Heart className="mr-2 h-4 w-4" />
+                    Donate
+                </Link>
               </Button>
             </SheetContent>
           </Sheet>
