@@ -248,7 +248,7 @@ export default function Home() {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.4 }}
-        className="py-12 md:py-20 bg-secondary/50"
+        className="py-12 md:py-20 bg-blue-100"
       >
         <div className="container mx-auto px-4 text-center">
           <h2 className="font-headline text-3xl md:text-4xl">Ready to Make a Difference?</h2>
