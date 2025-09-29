@@ -1,3 +1,4 @@
+
 'use client';
 
 import Link from 'next/link';
@@ -36,14 +37,14 @@ export function Header() {
         <Logo />
         </Link>
         <div className="flex-1 flex justify-center">
-          <nav className="hidden md:flex items-center space-x-6 text-sm font-medium">
+          <nav className="hidden md:flex items-center space-x-8 text-base font-medium">
             {navLinks.map((link: NavLink) => (
               <Link
                 key={link.href}
                 href={link.href}
                 className={cn(
-                  'transition-colors hover:text-primary',
-                  pathname === link.href ? 'text-primary' : 'text-foreground/60'
+                  'transition-colors hover:text-accent',
+                  pathname === link.href ? 'text-accent' : 'text-foreground/70'
                 )}
               >
                 {link.label}
@@ -76,8 +77,8 @@ export function Header() {
                     href={link.href}
                     onClick={() => setIsOpen(false)}
                     className={cn(
-                        "text-lg font-medium transition-colors hover:text-primary",
-                        pathname === link.href ? 'text-primary' : 'text-foreground/80'
+                        "text-lg font-medium transition-colors hover:text-accent",
+                        pathname === link.href ? 'text-accent' : 'text-foreground/80'
                     )}
                   >
                     {link.label}
