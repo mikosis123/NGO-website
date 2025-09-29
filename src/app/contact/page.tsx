@@ -2,6 +2,7 @@ import ContactForm from "@/components/contact/contact-form";
 import Map from "@/components/contact/map";
 import { Mail, Phone, MapPin, Twitter, Facebook, Instagram } from "lucide-react";
 import Link from "next/link";
+import { Card } from "@/components/ui/card";
 
 export default function ContactPage() {
   const location = {
@@ -19,51 +20,51 @@ export default function ContactPage() {
           </p>
         </div>
 
-        <div className="mt-16 grid md:grid-cols-2 gap-12">
-            <div>
-                <h2 className="font-headline text-3xl mb-6">Contact Information</h2>
-                <div className="space-y-6">
-                    <div className="flex items-start gap-4">
-                        <div className="bg-primary/10 text-primary p-3 rounded-full">
-                            <MapPin className="h-6 w-6"/>
-                        </div>
-                        <div>
-                            <h3 className="font-semibold text-lg">Our Office</h3>
-                            <p className="text-muted-foreground">123 Charity Lane, Hope City, 90210, USA</p>
-                        </div>
-                    </div>
-                     <div className="flex items-start gap-4">
-                        <div className="bg-primary/10 text-primary p-3 rounded-full">
-                            <Mail className="h-6 w-6"/>
-                        </div>
-                        <div>
-                            <h3 className="font-semibold text-lg">Email Us</h3>
-                            <p className="text-muted-foreground hover:text-primary"><a href="mailto:connect@empowerchange.org">connect@empowerchange.org</a></p>
-                        </div>
-                    </div>
-                     <div className="flex items-start gap-4">
-                        <div className="bg-primary/10 text-primary p-3 rounded-full">
-                            <Phone className="h-6 w-6"/>
-                        </div>
-                        <div>
-                            <h3 className="font-semibold text-lg">Call Us</h3>
-                            <p className="text-muted-foreground hover:text-primary"><a href="tel:+1234567890">+1 (234) 567-890</a></p>
-                        </div>
-                    </div>
+        <Card className="mt-16 grid lg:grid-cols-2 overflow-hidden shadow-lg">
+          <div className="p-8 bg-muted/50">
+            <h2 className="font-headline text-3xl mb-6">Contact Information</h2>
+            <div className="space-y-6">
+              <div className="flex items-start gap-4">
+                <div className="bg-primary/10 text-primary p-3 rounded-full">
+                  <MapPin className="h-6 w-6"/>
                 </div>
-                 <h3 className="font-semibold text-lg mt-8 mb-4">Follow Us</h3>
-                 <div className="flex space-x-4">
-                    <Link href="#" className="text-muted-foreground hover:text-primary"><Twitter size={24} /></Link>
-                    <Link href="#" className="text-muted-foreground hover:text-primary"><Facebook size={24} /></Link>
-                    <Link href="#" className="text-muted-foreground hover:text-primary"><Instagram size={24} /></Link>
+                <div>
+                  <h3 className="font-semibold text-lg">Our Office</h3>
+                  <p className="text-muted-foreground">123 Charity Lane, Hope City, 90210, USA</p>
                 </div>
+              </div>
+              <div className="flex items-start gap-4">
+                <div className="bg-primary/10 text-primary p-3 rounded-full">
+                  <Mail className="h-6 w-6"/>
+                </div>
+                <div>
+                  <h3 className="font-semibold text-lg">Email Us</h3>
+                  <p className="text-muted-foreground hover:text-primary"><a href="mailto:connect@empowerchange.org">connect@empowerchange.org</a></p>
+                </div>
+              </div>
+              <div className="flex items-start gap-4">
+                <div className="bg-primary/10 text-primary p-3 rounded-full">
+                  <Phone className="h-6 w-6"/>
+                </div>
+                <div>
+                  <h3 className="font-semibold text-lg">Call Us</h3>
+                  <p className="text-muted-foreground hover:text-primary"><a href="tel:+1234567890">+1 (234) 567-890</a></p>
+                </div>
+              </div>
             </div>
+            <h3 className="font-semibold text-lg mt-8 mb-4">Follow Us</h3>
+            <div className="flex space-x-4">
+              <Link href="#" className="text-muted-foreground hover:text-primary"><Twitter size={24} /></Link>
+              <Link href="#" className="text-muted-foreground hover:text-primary"><Facebook size={24} /></Link>
+              <Link href="#" className="text-muted-foreground hover:text-primary"><Instagram size={24} /></Link>
+            </div>
+          </div>
 
-            <div>
-                <h2 className="font-headline text-3xl mb-6">Send Us a Message</h2>
-                <ContactForm />
-            </div>
-        </div>
+          <div className="p-8">
+            <h2 className="font-headline text-3xl mb-6">Send Us a Message</h2>
+            <ContactForm />
+          </div>
+        </Card>
       </div>
       <div className="w-full h-[400px] md:h-[500px] bg-muted">
         <Map center={location} />
