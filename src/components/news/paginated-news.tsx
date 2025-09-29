@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState } from 'react';
@@ -5,6 +6,7 @@ import ArticleCard from '@/components/news/article-card';
 import { mockNews } from '@/lib/mock-data';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const NEWS_PER_PAGE = 4;
 
@@ -26,8 +28,15 @@ export default function PaginatedNews() {
   return (
     <div>
       <div className="mt-12 max-w-4xl mx-auto space-y-12">
-        {currentNews.map((article) => (
-          <ArticleCard key={article.id} article={article} />
+        {currentNews.map((article, i) => (
+          <motion.div
+            key={article.id}
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: i * 0.2 }}
+          >
+            <ArticleCard article={article} />
+          </motion.div>
         ))}
       </div>
 

@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState } from 'react';
@@ -6,6 +7,7 @@ import ProjectCard from './project-card';
 import { Button } from '../ui/button';
 import { cn } from '@/lib/utils';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 type FilterControlsProps = {
   categories: string[];
@@ -58,8 +60,15 @@ export default function FilterControls({ categories }: FilterControlsProps) {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-8">
-        {currentProjects.map(project => (
-          <ProjectCard key={project.id} project={project} />
+        {currentProjects.map((project, i) => (
+            <motion.div
+                key={project.id}
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: i * 0.2 }}
+            >
+                <ProjectCard project={project} />
+            </motion.div>
         ))}
       </div>
 
