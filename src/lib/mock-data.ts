@@ -1,7 +1,7 @@
 
-import type { Project, NewsArticle, TeamMember, ImpactMetric, NavLink } from './types';
+import type { Project, NewsArticle, TeamMember, ImpactMetric, NavLink, Resource } from './types';
 import { PlaceHolderImages } from './placeholder-images';
-import { Users, Briefcase, Calendar, Globe, Water, GraduationCap, School, Sprout } from 'lucide-react';
+import { Users, Briefcase, Calendar, Globe, Water, GraduationCap, School, Sprout, FileText } from 'lucide-react';
 
 function findImage(id: string) {
   const image = PlaceHolderImages.find(p => p.id === id);
@@ -105,7 +105,7 @@ export const mockProjects: Project[] = [
   },
   {
     id: '7',
-    slug: 'school-building-initiative',
+    slug: 'rural-school-building-initiative',
     title: 'Rural School Building Initiative',
     category: 'Youth',
     description: 'Constructing and equipping primary schools in remote villages.',
@@ -241,6 +241,29 @@ export const mockTeam: TeamMember[] = [
   },
 ];
 
+export const mockResources: Resource[] = [
+  {
+    id: '1',
+    title: '2023 Annual Report',
+    description: 'A comprehensive overview of our activities and financial performance in 2023.',
+    fileUrl: '#',
+    icon: FileText,
+  },
+  {
+    id: '2',
+    title: 'Sustainable Farming Impact Study',
+    description: 'In-depth analysis of the positive outcomes from our Sustainable Farming Initiative.',
+    fileUrl: '#',
+    icon: FileText,
+  },
+  {
+    id: '3',
+    title: 'Community Health Program Brief',
+    description: 'A summary of our community health interventions and their life-saving impact.',
+    fileUrl: '#',
+    icon: FileText,
+  },
+];
     
 
     

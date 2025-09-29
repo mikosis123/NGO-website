@@ -50,3 +50,11 @@ export type Event = {
   location: string;
   description: string;
 };
+
+export type Resource = {
+  id: string;
+  title: string;
+  description: string;
+  fileUrl: string;
+  icon: React.ComponentType<{ className?: string }>;
+};
