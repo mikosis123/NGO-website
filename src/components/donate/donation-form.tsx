@@ -10,6 +10,7 @@ import { Input } from '@/components/ui/input';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { toast } from '@/hooks/use-toast';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Heart } from 'lucide-react';
 
 const donationSchema = z.object({
   amount: z.string().min(1, 'Please select or enter an amount.'),
@@ -160,7 +161,8 @@ export default function DonationForm() {
               )}
             />
 
-            <Button type="submit" className="w-full text-lg py-6 bg-accent hover:bg-accent/90 text-accent-foreground" size="lg">
+            <Button type="submit" className="w-full text-lg py-6 bg-accent hover:bg-accent/90 text-accent-foreground animate-pulse" size="lg">
+              <Heart className="mr-2 h-5 w-5" />
               Donate Now
             </Button>
           </form>

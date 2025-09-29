@@ -7,7 +7,7 @@ import ImpactCounters from '@/components/homepage/impact-counters';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { mockNews, mockProjects } from '@/lib/mock-data';
 import ProjectCard from '@/components/projects/project-card';
-import { ArrowRight, Quote } from 'lucide-react';
+import { ArrowRight, Quote, Heart } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
     Carousel,
@@ -77,8 +77,11 @@ export default function Home() {
             Join us in our mission to create sustainable change in Ethiopia through community-driven projects in health, education, and environmental protection.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-4">
-            <Button asChild size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground">
-              <Link href="/donate">Donate Now</Link>
+            <Button asChild size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground animate-pulse">
+              <Link href="/donate">
+                <Heart className="mr-2 h-5 w-5" />
+                Donate Now
+              </Link>
             </Button>
             <Button asChild size="lg" variant="secondary">
               <Link href="/about">Get Involved</Link>
@@ -181,8 +184,11 @@ export default function Home() {
             Your support is crucial to our work in Ethiopia. Whether you donate, volunteer, or spread the word, you are a part of the change.
           </p>
           <div className="mt-8 flex justify-center gap-4">
-            <Button asChild size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground">
-              <Link href="/donate">Support Our Cause</Link>
+            <Button asChild size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground animate-pulse">
+              <Link href="/donate">
+                <Heart className="mr-2 h-5 w-5" />
+                Support Our Cause
+              </Link>
             </Button>
             <Button asChild size="lg" variant="outline">
               <Link href="/contact">Get Involved</Link>
