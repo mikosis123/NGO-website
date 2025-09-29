@@ -1,4 +1,5 @@
 
+
 'use client'
 
 import Image from 'next/image';
@@ -108,7 +109,7 @@ export default function Home() {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="mt-8 flex flex-wrap justify-center gap-4"
           >
-            <Button asChild size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground animate-pulse">
+            <Button asChild size="lg" className="bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-500 hover:to-blue-600 text-white">
               <Link href="/donate">
                 <Heart className="mr-2 h-5 w-5" />
                 Donate Now
@@ -163,7 +164,7 @@ export default function Home() {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
-        className="py-12 md:py-20 bg-accent/20"
+        className="py-12 md:py-20 bg-blue-100"
       >
         <div className="container mx-auto px-4">
             <div className="text-center max-w-3xl mx-auto mb-12">
@@ -255,7 +256,7 @@ export default function Home() {
             Your support is crucial to our work in Ethiopia. Whether you donate, volunteer, or spread the word, you are a part of the change.
           </p>
           <div className="mt-8 flex justify-center gap-4">
-            <Button asChild size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground animate-pulse">
+            <Button asChild size="lg" className="bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-500 hover:to-blue-600 text-white">
               <Link href="/donate">
                 <Heart className="mr-2 h-5 w-5" />
                 Support Our Cause

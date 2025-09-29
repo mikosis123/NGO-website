@@ -52,7 +52,7 @@ export function Header() {
           </nav>
         </div>
         <div className="flex items-center justify-end space-x-4">
-          <Button asChild className="hidden md:inline-flex bg-accent hover:bg-accent/90 text-accent-foreground animate-pulse">
+          <Button asChild className="hidden md:inline-flex bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-500 hover:to-blue-600 text-white">
             <Link href="/donate">
                 <Heart className="mr-2 h-4 w-4" />
                 Donate
@@ -68,10 +68,6 @@ export function Header() {
             <SheetContent side="right" className="w-[300px] sm:w-[400px]">
               <div className="flex justify-between items-center mb-8">
                 <Logo />
-                <Button variant="ghost" size="icon" onClick={() => setIsOpen(false)}>
-                  <X className="h-6 w-6" />
-                  <span className="sr-only">Close Menu</span>
-                </Button>
               </div>
               <nav className="flex flex-col space-y-4">
                 {navLinks.map((link) => (
@@ -88,7 +84,7 @@ export function Header() {
                   </Link>
                 ))}
               </nav>
-              <Button asChild className="w-full mt-8 bg-accent hover:bg-accent/90 text-accent-foreground animate-pulse">
+              <Button asChild className="w-full mt-8 bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-500 hover:to-blue-600 text-white">
                 <Link href="/donate" onClick={() => setIsOpen(false)}>
                     <Heart className="mr-2 h-4 w-4" />
                     Donate

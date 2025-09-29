@@ -161,7 +161,7 @@ export default function DonationForm() {
               )}
             />
 
-            <Button type="submit" className="w-full text-lg py-6 bg-accent hover:bg-accent/90 text-accent-foreground animate-pulse" size="lg">
+            <Button type="submit" className="w-full text-lg py-6 bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-500 hover:to-blue-600 text-white" size="lg">
               <Heart className="mr-2 h-5 w-5" />
               Donate Now
             </Button>
