@@ -8,6 +8,7 @@ import { CheckCircle, Users, Calendar, Goal, Heart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { Progress } from '@/components/ui/progress';
+import BackButton from '@/components/back-button';
 
 type ProjectPageProps = {
   params: {
@@ -28,6 +29,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
   return (
     <div className="container mx-auto px-4 py-12 md:py-20 pt-32 md:pt-32">
       <div className="max-w-4xl mx-auto">
+        <BackButton />
         <div className="mb-8">
           <Badge variant="secondary" className="mb-2 text-base">{project.category}</Badge>
           <h1 className="font-headline text-4xl md:text-5xl font-bold">{project.title}</h1>

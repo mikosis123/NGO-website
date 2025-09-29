@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import { format } from 'date-fns';
 import { Calendar, User } from 'lucide-react';
+import BackButton from '@/components/back-button';
 
 type NewsPageProps = {
   params: {
@@ -23,6 +24,7 @@ export default function NewsArticlePage({ params }: NewsPageProps) {
   return (
     <div className="container mx-auto px-4 py-12 md:py-20 pt-32 md:pt-32">
       <div className="max-w-3xl mx-auto">
+        <BackButton />
         <article className="prose lg:prose-xl max-w-none">
           <div className="mb-8">
             <h1 className="font-headline !text-4xl md:!text-5xl !leading-tight mb-4">{article.title}</h1>
