@@ -5,6 +5,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import Autoplay from "embla-carousel-autoplay"
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
@@ -22,6 +23,7 @@ import {
     CarouselPrevious,
 } from "@/components/ui/carousel"
 import ArticleCard from '@/components/news/article-card';
+import React from 'react';
 
 const testimonials = [
     {
@@ -71,6 +73,9 @@ export default function Home() {
   const heroImage = PlaceHolderImages.find(p => p.id === 'hero-community');
   const featuredProjects = mockProjects.slice(0, 3);
   const latestNews = mockNews.slice(0, 2);
+  const plugin = React.useRef(
+    Autoplay({ delay: 2000, stopOnInteraction: true })
+  )
 
   return (
     <div className="flex flex-col">
@@ -171,11 +176,14 @@ export default function Home() {
                 <h2 className="font-headline text-3xl md:text-4xl font-bold">Stories from the Field</h2>
             </div>
             <Carousel
+                plugins={[plugin.current]}
+                className="w-full max-w-4xl mx-auto"
+                onMouseEnter={plugin.current.stop}
+                onMouseLeave={plugin.current.reset}
                 opts={{
                     align: "start",
                     loop: true,
                 }}
-                className="w-full max-w-4xl mx-auto"
             >
                 <CarouselContent>
                     {testimonials.map((testimonial, index) => (
