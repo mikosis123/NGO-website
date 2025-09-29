@@ -1,5 +1,9 @@
+
+'use client'
+
 import Image from 'next/image';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
@@ -49,6 +53,18 @@ const testimonials = [
     }
 ]
 
+const sectionVariants = {
+  hidden: { opacity: 0, y: 50 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: "easeOut",
+    },
+  },
+};
+
 
 export default function Home() {
   const heroImage = PlaceHolderImages.find(p => p.id === 'hero-community');
@@ -70,13 +86,28 @@ export default function Home() {
         )}
         <div className="absolute inset-0 bg-black/50" />
         <div className="relative z-10 flex h-full flex-col items-center justify-center text-center text-white p-4">
-          <h1 className="font-headline text-4xl md:text-6xl font-bold !leading-tight">
+          <motion.h1
+            initial={{ opacity: 0, y: -50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="font-headline text-4xl md:text-6xl font-bold !leading-tight"
+          >
             Light for Generation Ethiopia
-          </h1>
-          <p className="mt-4 max-w-2xl text-lg md:text-xl text-slate-200">
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="mt-4 max-w-2xl text-lg md:text-xl text-slate-200"
+          >
             Join us in our mission to create sustainable change in Ethiopia through community-driven projects in health, education, and environmental protection.
-          </p>
-          <div className="mt-8 flex flex-wrap justify-center gap-4">
+          </motion.p>
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="mt-8 flex flex-wrap justify-center gap-4"
+          >
             <Button asChild size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground animate-pulse">
               <Link href="/donate">
                 <Heart className="mr-2 h-5 w-5" />
@@ -86,13 +117,19 @@ export default function Home() {
             <Button asChild size="lg" variant="secondary">
               <Link href="/about">Get Involved</Link>
             </Button>
-          </div>
+          </motion.div>
         </div>
       </section>
 
       <ImpactCounters />
 
-      <section className="py-12 md:py-20 bg-background">
+      <motion.section
+        variants={sectionVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+        className="py-12 md:py-20 bg-background"
+      >
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="prose prose-lg max-w-none">
@@ -105,15 +142,29 @@ export default function Home() {
               </Button>
             </div>
             <div className="grid sm:grid-cols-2 gap-6">
-              {featuredProjects.slice(0, 2).map((project) => (
-                <ProjectCard key={project.id} project={project} />
+              {featuredProjects.slice(0, 2).map((project, i) => (
+                <motion.div
+                  key={project.id}
+                  custom={i}
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0, transition: { duration: 0.5, delay: i * 0.2 } }}
+                  viewport={{ once: true }}
+                >
+                  <ProjectCard project={project} />
+                </motion.div>
               ))}
             </div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
-      <section className="py-12 md:py-20 bg-accent/20">
+      <motion.section
+        variants={sectionVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        className="py-12 md:py-20 bg-accent/20"
+      >
         <div className="container mx-auto px-4">
             <div className="text-center max-w-3xl mx-auto mb-12">
                 <h2 className="font-headline text-3xl md:text-4xl font-bold">Stories from the Field</h2>
@@ -153,9 +204,15 @@ export default function Home() {
                 <CarouselNext className="border-accent bg-white text-accent hover:bg-accent hover:text-accent-foreground" />
             </Carousel>
         </div>
-      </section>
+      </motion.section>
 
-      <section className="py-12 md:py-20 bg-background">
+      <motion.section
+        variants={sectionVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+        className="py-12 md:py-20 bg-background"
+      >
         <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto mb-12">
             <h2 className="font-headline text-3xl md:text-4xl font-bold">Latest News</h2>
@@ -164,8 +221,16 @@ export default function Home() {
             </p>
           </div>
           <div className="max-w-4xl mx-auto space-y-12">
-            {latestNews.map(article => (
-              <ArticleCard key={article.id} article={article} />
+            {latestNews.map((article, i) => (
+                <motion.div
+                    key={article.id}
+                    custom={i}
+                    initial={{ opacity: 0, y: 50 }}
+                    whileInView={{ opacity: 1, y: 0, transition: { duration: 0.5, delay: i * 0.3 } }}
+                    viewport={{ once: true }}
+                >
+                    <ArticleCard article={article} />
+                </motion.div>
             ))}
           </div>
           <div className="text-center mt-12">
@@ -174,10 +239,16 @@ export default function Home() {
             </Button>
           </div>
         </div>
-      </section>
+      </motion.section>
 
 
-      <section className="py-12 md:py-20 bg-secondary/50">
+      <motion.section
+        variants={sectionVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.4 }}
+        className="py-12 md:py-20 bg-secondary/50"
+      >
         <div className="container mx-auto px-4 text-center">
           <h2 className="font-headline text-3xl md:text-4xl">Ready to Make a Difference?</h2>
           <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
@@ -195,7 +266,7 @@ export default function Home() {
             </Button>
           </div>
         </div>
-      </section>
+      </motion.section>
     </div>
   );
 }
