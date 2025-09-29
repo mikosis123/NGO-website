@@ -10,7 +10,8 @@ import {
   Users,
   Settings,
   Briefcase,
-  PanelLeft
+  PanelLeft,
+  Image as GalleryIcon
 } from 'lucide-react';
 import {
   Sidebar,
@@ -33,6 +34,7 @@ const adminNavLinks = [
   { href: '/admin', label: 'Dashboard', icon: Home },
   { href: '/admin/projects', label: 'Projects', icon: Briefcase },
   { href: '/admin/news', label: 'News', icon: Newspaper },
+  { href: '/admin/gallery', label: 'Gallery', icon: GalleryIcon },
   { href: '/admin/events', label: 'Events', icon: Calendar },
   { href: '/admin/resources', label: 'Resources', icon: FolderUp },
   { href: '/admin/donations', label: 'Donations', icon: HandCoins },
