@@ -34,6 +34,7 @@ export type TeamMember = {
   role: string;
   imageUrl: string;
   imageHint: string;
+  bio?: string;
 };
 
 export type ImpactMetric = {

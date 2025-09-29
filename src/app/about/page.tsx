@@ -8,6 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { motion } from 'framer-motion';
 import { Goal, Eye, Shield } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 export default function AboutPage() {
   const aboutHeroImage = PlaceHolderImages.find(p => p.id === 'about-hero');
@@ -66,33 +67,36 @@ export default function AboutPage() {
         </div>
         
         <div className="mt-20">
-            <h2 className="font-headline text-3xl md:text-4xl font-bold text-center mb-10">Meet Our Team</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+            <h2 className="font-headline text-3xl md:text-4xl font-bold text-center mb-16">Meet Our Team</h2>
+            <div className="max-w-4xl mx-auto space-y-16">
             {mockTeam.map((member: TeamMember, i: number) => (
                 <motion.div
                     key={member.id}
-                    initial={{ opacity: 0, y: 50 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: i * 0.2 }}
-                    viewport={{ once: true }}
-                    className="h-full"
+                    initial={{ opacity: 0, x: i % 2 === 0 ? -100 : 100 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.6 }}
+                    viewport={{ once: true, amount: 0.5 }}
                 >
-                    <Card className="text-center overflow-hidden transition-all hover:shadow-xl hover:-translate-y-1 h-full">
-                    <CardHeader className="p-0">
-                        <Image
-                        src={member.imageUrl}
-                        alt={`Portrait of ${member.name}`}
-                        width={400}
-                        height={400}
-                        className="w-full h-auto aspect-square object-cover"
-                        data-ai-hint={member.imageHint}
-                        />
-                    </CardHeader>
-                    <CardContent className="p-4">
-                        <CardTitle className="text-xl font-headline">{member.name}</CardTitle>
-                        <p className="text-primary font-medium">{member.role}</p>
-                    </CardContent>
-                    </Card>
+                    <div className={cn(
+                        "grid md:grid-cols-2 gap-8 md:gap-12 items-center",
+                    )}>
+                        <div className={cn("relative aspect-square rounded-lg overflow-hidden shadow-xl", i % 2 !== 0 && "md:order-last")}>
+                            <Image
+                                src={member.imageUrl}
+                                alt={`Portrait of ${member.name}`}
+                                fill
+                                className="object-cover"
+                                data-ai-hint={member.imageHint}
+                            />
+                        </div>
+                        <div className={cn("text-center", i % 2 === 0 ? "md:text-left" : "md:text-right")}>
+                            <h3 className="font-headline text-3xl font-bold">{member.name}</h3>
+                            <p className="text-primary text-xl font-medium mt-1">{member.role}</p>
+                            <p className="mt-4 text-muted-foreground max-w-md mx-auto md:mx-0">
+                                {member.bio || "A dedicated member of our team, working tirelessly to make a positive impact in the communities we serve."}
+                            </p>
+                        </div>
+                    </div>
                 </motion.div>
             ))}
             </div>

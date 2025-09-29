@@ -221,6 +221,7 @@ export const mockTeam: TeamMember[] = [
     role: 'Founder & CEO',
     imageUrl: findImage('team-member-1').url,
     imageHint: findImage('team-member-1').hint,
+    bio: 'With over 20 years of experience in international development, Dr. Sharma founded Light for Generation Ethiopia with a vision to create lasting, community-driven change.'
   },
   {
     id: '2',
@@ -228,6 +229,7 @@ export const mockTeam: TeamMember[] = [
     role: 'Director of Programs',
     imageUrl: findImage('team-member-2').url,
     imageHint: findImage('team-member-2').hint,
+    bio: 'Ben oversees all of our field operations, ensuring that our projects are implemented effectively and sustainably. He is passionate about empowering local leaders.'
   },
   {
     id: '3',
@@ -235,6 +237,7 @@ export const mockTeam: TeamMember[] = [
     role: 'Lead Field Coordinator',
     imageUrl: findImage('team-member-3').url,
     imageHint: findImage('team-member-3').hint,
+    bio: 'Fatima works directly with our partner communities, building relationships and ensuring that our projects meet their unique needs. Her dedication is the heart of our work.'
   },
 ];
 
