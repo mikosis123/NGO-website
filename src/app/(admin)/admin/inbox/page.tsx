@@ -1,9 +1,20 @@
 
+'use client';
+
+import { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
-const mockMessages = [
+const initialMessages = [
     {
         id: "1",
         name: "Jane Doe",
@@ -43,6 +54,18 @@ const mockMessages = [
 ]
 
 export default function AdminInboxPage() {
+    const [messages, setMessages] = useState(initialMessages);
+    const [selectedMessage, setSelectedMessage] = useState<(typeof initialMessages[0]) | null>(null);
+
+    const handleRowClick = (message: typeof initialMessages[0]) => {
+        setSelectedMessage(message);
+        setMessages(prevMessages => 
+            prevMessages.map(m => 
+                m.id === message.id ? { ...m, read: true } : m
+            )
+        );
+    };
+
     return (
         <Card>
             <CardHeader>
@@ -50,35 +73,57 @@ export default function AdminInboxPage() {
                 <CardDescription>View messages from your website's contact form.</CardDescription>
             </CardHeader>
             <CardContent>
-                <Table>
-                    <TableHeader>
-                        <TableRow>
-                        <TableHead className="hidden w-[100px] sm:table-cell">
-                            Status
-                        </TableHead>
-                        <TableHead>From</TableHead>
-                        <TableHead>Subject</TableHead>
-                        <TableHead className="hidden md:table-cell">
-                            Received
-                        </TableHead>
-                        </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                        {mockMessages.map(message => (
-                            <TableRow key={message.id} className={!message.read ? 'bg-secondary/50 font-bold' : ''}>
-                                <TableCell className="hidden sm:table-cell">
-                                    {!message.read && <Badge variant="default">New</Badge>}
-                                </TableCell>
-                                <TableCell>
-                                    <div className="font-medium">{message.name}</div>
-                                    <div className="text-xs text-muted-foreground">{message.email}</div>
-                                </TableCell>
-                                <TableCell>{message.subject}</TableCell>
-                                <TableCell className="hidden md:table-cell">{message.date}</TableCell>
+                <Dialog>
+                    <Table>
+                        <TableHeader>
+                            <TableRow>
+                            <TableHead className="hidden w-[100px] sm:table-cell">
+                                Status
+                            </TableHead>
+                            <TableHead>From</TableHead>
+                            <TableHead>Subject</TableHead>
+                            <TableHead className="hidden md:table-cell">
+                                Received
+                            </TableHead>
                             </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
+                        </TableHeader>
+                        <TableBody>
+                            {messages.map(message => (
+                                <DialogTrigger asChild key={message.id}>
+                                    <TableRow 
+                                        onClick={() => handleRowClick(message)}
+                                        className={!message.read ? 'bg-secondary/50 font-bold cursor-pointer' : 'cursor-pointer'}
+                                    >
+                                        <TableCell className="hidden sm:table-cell">
+                                            {!message.read && <Badge variant="default">New</Badge>}
+                                        </TableCell>
+                                        <TableCell>
+                                            <div className="font-medium">{message.name}</div>
+                                            <div className="text-xs text-muted-foreground">{message.email}</div>
+                                        </TableCell>
+                                        <TableCell>{message.subject}</TableCell>
+                                        <TableCell className="hidden md:table-cell">{message.date}</TableCell>
+                                    </TableRow>
+                                </DialogTrigger>
+                            ))}
+                        </TableBody>
+                    </Table>
+                    {selectedMessage && (
+                        <DialogContent>
+                            <DialogHeader>
+                                <DialogTitle>{selectedMessage.subject}</DialogTitle>
+                                <DialogDescription>
+                                    From: {selectedMessage.name} &lt;{selectedMessage.email}&gt;
+                                    <br />
+                                    Received: {selectedMessage.date}
+                                </DialogDescription>
+                            </DialogHeader>
+                            <div className="prose prose-sm mt-4">
+                                <p>{selectedMessage.message}</p>
+                            </div>
+                        </DialogContent>
+                    )}
+                </Dialog>
             </CardContent>
         </Card>
     )
