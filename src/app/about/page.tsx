@@ -7,6 +7,7 @@ import Image from 'next/image';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { motion } from 'framer-motion';
+import { Goal, Eye, Shield } from 'lucide-react';
 
 export default function AboutPage() {
   const aboutHeroImage = PlaceHolderImages.find(p => p.id === 'about-hero');
@@ -36,16 +37,31 @@ export default function AboutPage() {
       <div className="container mx-auto px-4 py-12 md:py-20">
         <div className="grid md:grid-cols-3 gap-8 text-center">
             <div>
-            <h2 className="font-headline text-3xl font-semibold">Our Mission</h2>
-            <p className="mt-2 text-muted-foreground">To empower vulnerable communities in Ethiopia through sustainable development projects in health, education, and environmental conservation.</p>
+              <div className="flex justify-center mb-4">
+                <div className="bg-primary/10 text-primary p-4 rounded-full">
+                  <Goal className="h-8 w-8"/>
+                </div>
+              </div>
+              <h2 className="font-headline text-3xl font-semibold">Our Mission</h2>
+              <p className="mt-2 text-muted-foreground">To empower vulnerable communities in Ethiopia through sustainable development projects in health, education, and environmental conservation.</p>
             </div>
             <div>
-            <h2 className="font-headline text-3xl font-semibold">Our Vision</h2>
-            <p className="mt-2 text-muted-foreground">A world where every Ethiopian has the opportunity to achieve their full potential and live with dignity and hope.</p>
+              <div className="flex justify-center mb-4">
+                  <div className="bg-primary/10 text-primary p-4 rounded-full">
+                    <Eye className="h-8 w-8"/>
+                  </div>
+                </div>
+              <h2 className="font-headline text-3xl font-semibold">Our Vision</h2>
+              <p className="mt-2 text-muted-foreground">A world where every Ethiopian has the opportunity to achieve their full potential and live with dignity and hope.</p>
             </div>
             <div>
-            <h2 className="font-headline text-3xl font-semibold">Our Values</h2>
-            <p className="mt-2 text-muted-foreground">Collaboration, Integrity, Sustainability, and Compassion guide every action we take.</p>
+              <div className="flex justify-center mb-4">
+                  <div className="bg-primary/10 text-primary p-4 rounded-full">
+                    <Shield className="h-8 w-8"/>
+                  </div>
+                </div>
+              <h2 className="font-headline text-3xl font-semibold">Our Values</h2>
+              <p className="mt-2 text-muted-foreground">Collaboration, Integrity, Sustainability, and Compassion guide every action we take.</p>
             </div>
         </div>
         
