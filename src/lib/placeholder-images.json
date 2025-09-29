@@ -15,7 +15,7 @@
     {
       "id": "project-agriculture",
       "description": "Farmers working in a lush green field.",
-      "imageUrl": "https://images.unsplash.com/photo-1515150144380-bca9f1650ed9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxzdXN0YWluYWJsZSUyMGFncmljdWx0dXJlfGVufDB8fHx8MTc1OTA1MTUwMnww&ixlib=rb-4.0.3&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1515150144380-bca9f1650ed9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxzdXN0YWluYWJsZSUyMGFncmljdWx0dXJlfGVufDB8fHx8fDE3NTkwNTE1MDJ8MA&ixlib=rb-4.0.3&q=80&w=1080",
       "imageHint": "sustainable agriculture"
     },
     {
@@ -57,7 +57,7 @@
     {
       "id": "news-article-1",
       "description": "A new water well being celebrated by a community.",
-      "imageUrl": "https://images.unsplash.com/photo-1538300342682-cf57afb97285?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxjbGVhbiUyMHdhdGVyfGVufDB8fHx8MTc1ODk3Nzg1MHww&ixlib=rb-4.0.3&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1538300342682-cf57afb97285?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxjbGVhbiUyMHdhdGVyfGVufDB8fHx8fDE3NTg5NzY4NTAfMA&ixlib=rb-4.0.3&q=80&w=1080",
       "imageHint": "clean water"
     },
     {
@@ -71,6 +71,54 @@
       "description": "A smiling donor.",
       "imageUrl": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxoYXBweSUyMHBlcnNvbnxlbnwwfHx8fDE3NTkwMjUyMzF8MA&ixlib.rb-4.0.3&q=80&w=1080",
       "imageHint": "happy person"
+    },
+    {
+      "id": "gallery-women-empowerment",
+      "description": "Women in a vocational training class learning new skills.",
+      "imageUrl": "https://images.unsplash.com/photo-1521737852567-6949f3f9f2b5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHx3b21lbiUyMGxlYXJuaW5nfGVufDB8fHx8fDE3NTkwNTI1ODR8MA&ixlib=rb-4.0.3&q=80&w=1080",
+      "imageHint": "women learning"
+    },
+    {
+      "id": "gallery-village-community",
+      "description": "A vibrant community gathering in a rural village.",
+      "imageUrl": "https://images.unsplash.com/photo-1534951009808-766178b47a7b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxydXJhbCUyMGNvbW11bml0eXxlbnwwfHx8fDE3NTkwNTI2MjR8MA&ixlib=rb-4.0.3&q=80&w=1080",
+      "imageHint": "village community"
+    },
+    {
+      "id": "gallery-children-smiling",
+      "description": "Happy children playing together.",
+      "imageUrl": "https://images.unsplash.com/photo-1509228678505-6a8b1b2f42ea?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxjaGlsZHJlbiUyMHNtaWxpbmd8ZW58MHx8fHwxNzU5MDUyNjYyfDA&ixlib=rb-4.0.3&q=80&w=1080",
+      "imageHint": "children smiling"
+    },
+    {
+      "id": "gallery-building-school",
+      "description": "Community members working together to build a new school.",
+      "imageUrl": "https://images.unsplash.com/photo-1577896851231-7014c0256166?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxidWlsZGluZyUyMHNjaG9vbHxlbnwwfHx8fDE3NTkwNTI2OTZ8MA&ixlib=rb-4.0.3&q=80&w=1080",
+      "imageHint": "building school"
+    },
+    {
+      "id": "gallery-medical-help",
+      "description": "A healthcare worker providing medical assistance.",
+      "imageUrl": "https://images.unsplash.com/photo-1576091160550-2173dba999ef?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxtZWRpY2FsJTIwYXNzaXN0YW5jZXxlbnwwfHx8fDE3NTkwNTI3MzB8MA&ixlib=rb-4.0.3&q=80&w=1080",
+      "imageHint": "medical help"
+    },
+    {
+      "id": "gallery-food-distribution",
+      "description": "Volunteers distributing food to people in need.",
+      "imageUrl": "https://images.unsplash.com/photo-1618488812948-43f71b427b31?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxmb29kJTIwZGlzdHJpYnV0aW9ufGVufDB8fHx8fDE3NTkwNTI3NjR8MA&ixlib=rb-4.0.3&q=80&w=1080",
+      "imageHint": "food distribution"
+    },
+    {
+      "id": "gallery-clean-water-access",
+      "description": "Children drinking clean water from a new well.",
+      "imageUrl": "https://images.unsplash.com/photo-1519757503038-a64f3da3122e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxjbGVhbiUyMHdhdGVyJTIwYWNjZXNzfGVufDB8fHx8fDE3NTkwNTI4MTB8MA&ixlib=rb-4.0.3&q=80&w=1080",
+      "imageHint": "clean water"
+    },
+    {
+      "id": "gallery-planting-trees",
+      "description": "A group of people planting trees in a field.",
+      "imageUrl": "https://images.unsplash.com/photo-1605338166943-22924558113c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxwbGFudGluZyUyMHRyZWVzfGVufDB8fHx8fDE3NTkwNTI4NDN8MA&ixlib=rb-4.0.3&q=80&w=1080",
+      "imageHint": "planting trees"
     }
   ]
 }
