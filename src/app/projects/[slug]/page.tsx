@@ -1,6 +1,7 @@
 
-import { mockProjects } from '@/lib/mock-data';
-import { notFound } from 'next/navigation';
+'use client';
+
+import { notFound, useParams } from 'next/navigation';
 import Image from 'next/image';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -9,18 +10,55 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { Progress } from '@/components/ui/progress';
 import BackButton from '@/components/back-button';
+import { useEffect, useState } from 'react';
+import { Project } from '@/lib/types';
+import { collection, query, where, getDocs, limit } from 'firebase/firestore';
+import { db } from '@/lib/firebase';
 
-type ProjectPageProps = {
-  params: {
-    slug: string;
-  };
-};
+export default function ProjectPage() {
+  const params = useParams();
+  const { slug } = params;
+  const [project, setProject] = useState<Project | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-export default function ProjectPage({ params }: ProjectPageProps) {
-  const project = mockProjects.find(p => p.slug === params.slug);
+  useEffect(() => {
+    const fetchProject = async () => {
+      if (!slug) return;
+      try {
+        const q = query(collection(db, "projects"), where("slug", "==", slug), limit(1));
+        const querySnapshot = await getDocs(q);
+        if (querySnapshot.empty) {
+          setError('Project not found');
+        } else {
+          const doc = querySnapshot.docs[0];
+          const data = doc.data();
+          setProject({
+            id: doc.id,
+            ...data
+          } as Project);
+        }
+      } catch (err) {
+        console.error("Error fetching project:", err);
+        setError('Failed to load project.');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProject();
+  }, [slug]);
+
+  if (loading) {
+    return <div className="container mx-auto px-4 py-12 md:py-20 pt-32 md:pt-32 text-center">Loading project details...</div>;
+  }
+  
+  if (error) {
+     notFound();
+  }
 
   if (!project) {
-    notFound();
+    return null; 
   }
 
   // Placeholder for funding progress

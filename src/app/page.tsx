@@ -10,7 +10,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import ImpactCounters from '@/components/homepage/impact-counters';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
-import { mockNews, mockProjects } from '@/lib/mock-data';
+import { mockNews } from '@/lib/mock-data';
 import ProjectCard from '@/components/projects/project-card';
 import { ArrowRight, Quote, Heart } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -22,7 +22,10 @@ import {
     CarouselPrevious,
 } from "@/components/ui/carousel"
 import ArticleCard from '@/components/news/article-card';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { Project } from '@/lib/types';
+import { collection, getDocs, limit, orderBy, query } from 'firebase/firestore';
+import { db } from '@/lib/firebase';
 
 const testimonials = [
     {
@@ -70,11 +73,34 @@ const sectionVariants = {
 
 export default function Home() {
   const heroImage = PlaceHolderImages.find(p => p.id === 'hero-community');
-  const featuredProjects = mockProjects.slice(0, 3);
+  const [featuredProjects, setFeaturedProjects] = useState<Project[]>([]);
   const latestNews = mockNews.slice(0, 2);
   const plugin = React.useRef(
     Autoplay({ delay: 2000, stopOnInteraction: true })
   )
+
+  useEffect(() => {
+    const fetchProjects = async () => {
+        try {
+            const q = query(collection(db, 'projects'), orderBy('createdAt', 'desc'), limit(2));
+            const querySnapshot = await getDocs(q);
+            const projectsData: Project[] = [];
+            querySnapshot.forEach((doc) => {
+                const data = doc.data();
+                projectsData.push({
+                    id: doc.id,
+                    ...data,
+                    createdAt: data.createdAt.toDate(),
+                } as Project);
+            });
+            setFeaturedProjects(projectsData);
+        } catch (error) {
+            console.error("Error fetching featured projects:", error);
+        }
+    };
+
+    fetchProjects();
+}, []);
 
   return (
     <div className="flex flex-col">
@@ -147,7 +173,7 @@ export default function Home() {
               </Button>
             </div>
             <div className="grid sm:grid-cols-2 gap-6">
-              {featuredProjects.slice(0, 2).map((project, i) => (
+              {featuredProjects.map((project, i) => (
                 <motion.div
                   key={project.id}
                   custom={i}
@@ -168,7 +194,7 @@ export default function Home() {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
-        className="py-12 md:py-20 bg-blue-100"
+        className="py-12 md-py-20 bg-blue-100"
       >
         <div className="container mx-auto px-4">
             <div className="text-center max-w-3xl mx-auto mb-12">

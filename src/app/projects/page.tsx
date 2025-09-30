@@ -1,13 +1,41 @@
 
+'use client';
+
 import FilterControls from '@/components/projects/filter-controls';
-import { mockProjects, mockResources } from '@/lib/mock-data';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import Link from 'next/link';
-import { Download } from 'lucide-react';
+import { Project } from '@/lib/types';
+import { useEffect, useState } from 'react';
+import { collection, getDocs, orderBy, query } from 'firebase/firestore';
+import { db } from '@/lib/firebase';
 
 export default function ProjectsPage() {
-  const categories = ['All', ...Array.from(new Set(mockProjects.map(p => p.category)))];
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const q = query(collection(db, 'projects'), orderBy('createdAt', 'desc'));
+        const querySnapshot = await getDocs(q);
+        const projectsData: Project[] = [];
+        querySnapshot.forEach((doc) => {
+          const data = doc.data();
+          projectsData.push({
+            id: doc.id,
+            ...data
+          } as Project);
+        });
+        setProjects(projectsData);
+      } catch (error) {
+        console.error("Error fetching projects: ", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProjects();
+  }, []);
+
+  const categories = ['All', ...Array.from(new Set(projects.map(p => p.category)))];
 
   return (
     <>
@@ -19,10 +47,8 @@ export default function ProjectsPage() {
           </p>
         </div>
 
-        <FilterControls categories={categories} />
+        <FilterControls categories={categories} projects={projects} loading={loading} />
       </div>
     </>
   );
 }
-
-    

@@ -2,26 +2,28 @@
 'use client';
 
 import { useState } from 'react';
-import { mockProjects } from '@/lib/mock-data';
 import ProjectCard from './project-card';
 import { Button } from '../ui/button';
 import { cn } from '@/lib/utils';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { Project } from '@/lib/types';
 
 type FilterControlsProps = {
   categories: string[];
+  projects: Project[];
+  loading: boolean;
 };
 
 const PROJECTS_PER_PAGE = 4;
 
-export default function FilterControls({ categories }: FilterControlsProps) {
+export default function FilterControls({ categories, projects, loading }: FilterControlsProps) {
   const [activeCategory, setActiveCategory] = useState('All');
   const [currentPage, setCurrentPage] = useState(1);
 
   const filteredProjects = activeCategory === 'All'
-    ? mockProjects
-    : mockProjects.filter(p => p.category === activeCategory);
+    ? projects
+    : projects.filter(p => p.category === activeCategory);
 
   const totalPages = Math.ceil(filteredProjects.length / PROJECTS_PER_PAGE);
   const startIndex = (currentPage - 1) * PROJECTS_PER_PAGE;
@@ -59,18 +61,23 @@ export default function FilterControls({ categories }: FilterControlsProps) {
         ))}
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-8">
-        {currentProjects.map((project, i) => (
-            <motion.div
-                key={project.id}
-                initial={{ opacity: 0, y: 50 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: i * 0.2 }}
-            >
-                <ProjectCard project={project} />
-            </motion.div>
-        ))}
-      </div>
+      {loading ? (
+        <p className="text-center">Loading projects...</p>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-8">
+            {currentProjects.map((project, i) => (
+                <motion.div
+                    key={project.id}
+                    initial={{ opacity: 0, y: 50 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: i * 0.2 }}
+                >
+                    <ProjectCard project={project} />
+                </motion.div>
+            ))}
+        </div>
+      )}
+
 
       {totalPages > 1 && (
         <div className="flex justify-center items-center gap-4 mt-12">
