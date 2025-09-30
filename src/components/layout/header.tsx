@@ -45,7 +45,7 @@ export function Header() {
         <Logo />
         </Link>
         <div className="flex-1 flex justify-center">
-          <nav className="hidden md:flex items-center space-x-8 text-base font-medium">
+          <nav className="hidden lg:flex items-center space-x-8 text-base font-medium">
             {navLinks.map((link: NavLink) => (
               <Link
                 key={link.href}
@@ -69,7 +69,7 @@ export function Header() {
           </Button>
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>
-              <Button variant="ghost" className={cn("md:hidden", "text-foreground hover:text-foreground hover:bg-black/10")}>
+              <Button variant="ghost" className={cn("lg:hidden", "text-foreground hover:text-foreground hover:bg-black/10")}>
                 <Menu className="h-6 w-6" />
                 <span className="sr-only">Open Menu</span>
               </Button>
@@ -106,3 +106,4 @@ export function Header() {
     </header>
   );
 }
+
