@@ -1,3 +1,4 @@
+
 export type NavLink = {
   href: string;
   label: string;
@@ -15,6 +16,7 @@ export type Project = {
   goals: string[];
   beneficiaries: string;
   timeline: string;
+  createdAt: Date;
 };
 
 export type NewsArticle = {

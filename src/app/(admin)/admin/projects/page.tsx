@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/dialog";
 import { ProjectForm } from "./project-form";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { ProjectsTable } from "./projects-table";
 
 
 export default function AdminProjectsPage() {
@@ -43,7 +44,7 @@ export default function AdminProjectsPage() {
                 </Dialog>
             </CardHeader>
             <CardContent>
-                <p>A table of projects will be displayed here, with options to add, edit, and delete.</p>
+                <ProjectsTable />
             </CardContent>
         </Card>
     )
