@@ -10,8 +10,10 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { toast } from '@/hooks/use-toast';
 import { db } from '@/lib/firebase';
-import { addDoc, collection } from 'firebase/firestore';
+import { addDoc, collection, doc, updateDoc } from 'firebase/firestore';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Project } from '@/lib/types';
+import { useEffect } from 'react';
 
 const projectSchema = z.object({
   title: z.string().min(3, 'Title must be at least 3 characters.'),
@@ -36,11 +38,19 @@ function slugify(text: string) {
     .replace(/-+$/, '');            // Trim - from end of text
 }
 
+interface ProjectFormProps {
+    projectToEdit?: Project | null;
+    onFinished?: () => void;
+}
 
-export function ProjectForm() {
+
+export function ProjectForm({ projectToEdit, onFinished }: ProjectFormProps) {
   const form = useForm<ProjectFormValues>({
     resolver: zodResolver(projectSchema),
-    defaultValues: {
+    defaultValues: projectToEdit ? {
+        ...projectToEdit,
+        goals: projectToEdit.goals.join(', '),
+    } : {
       title: '',
       description: '',
       longDescription: '',
@@ -53,29 +63,67 @@ export function ProjectForm() {
     },
   });
 
+  useEffect(() => {
+    if (projectToEdit) {
+      form.reset({
+        ...projectToEdit,
+        goals: projectToEdit.goals.join(', '),
+      });
+    } else {
+      form.reset({
+        title: '',
+        description: '',
+        longDescription: '',
+        imageUrl: '',
+        imageHint: '',
+        category: 'Agriculture',
+        goals: '',
+        beneficiaries: '',
+        timeline: '',
+      });
+    }
+  }, [projectToEdit, form]);
+
   async function onSubmit(data: ProjectFormValues) {
     try {
-      const docRef = await addDoc(collection(db, "projects"), {
-        ...data,
-        goals: data.goals.split(',').map(goal => goal.trim()),
-        slug: slugify(data.title),
-        createdAt: new Date(),
-      });
-      toast({
-        title: "Project Created!",
-        description: `The project "${data.title}" has been successfully created.`,
-      });
-      console.log("Document written with ID: ", docRef.id);
+      const submissionData = {
+          ...data,
+          goals: data.goals.split(',').map(goal => goal.trim()),
+          slug: slugify(data.title),
+      }
+
+      if (projectToEdit) {
+        const docRef = doc(db, "projects", projectToEdit.id);
+        await updateDoc(docRef, submissionData);
+        toast({
+            title: "Project Updated!",
+            description: `The project "${data.title}" has been successfully updated.`,
+        });
+      } else {
+        const docRef = await addDoc(collection(db, "projects"), {
+          ...submissionData,
+          createdAt: new Date(),
+        });
+        toast({
+            title: "Project Created!",
+            description: `The project "${data.title}" has been successfully created.`,
+        });
+        console.log("Document written with ID: ", docRef.id);
+      }
+      
       form.reset();
+      onFinished?.();
     } catch (error) {
-      console.error("Error adding document: ", error);
+      console.error("Error saving document: ", error);
       toast({
         title: "Error",
-        description: "There was an error creating the project. Please try again.",
+        description: `There was an error saving the project. Please try again.`,
         variant: "destructive",
       });
     }
   }
+
+  const buttonText = projectToEdit ? "Update Project" : "Create Project";
 
   return (
     <Form {...form}>
@@ -207,7 +255,7 @@ export function ProjectForm() {
             </FormItem>
           )}
         />
-        <Button type="submit" className="w-full">Create Project</Button>
+        <Button type="submit" className="w-full">{buttonText}</Button>
       </form>
     </Form>
   );

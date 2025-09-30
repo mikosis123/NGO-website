@@ -22,12 +22,16 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 import { toast } from '@/hooks/use-toast';
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { ProjectForm } from './project-form';
 
 
 export function ProjectsTable() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
   const [projectToDelete, setProjectToDelete] = useState<Project | null>(null);
+  const [projectToEdit, setProjectToEdit] = useState<Project | null>(null);
 
   useEffect(() => {
     const q = query(collection(db, 'projects'), orderBy('createdAt', 'desc'));
@@ -42,7 +46,6 @@ export function ProjectsTable() {
           beneficiaries: data.beneficiaries,
           timeline: data.timeline,
           createdAt: data.createdAt.toDate(),
-          // These fields are not displayed in the table but are part of the type
           slug: data.slug,
           description: data.description,
           longDescription: data.longDescription,
@@ -64,6 +67,10 @@ export function ProjectsTable() {
   const handleDeleteClick = (project: Project) => {
     setProjectToDelete(project);
   };
+
+  const handleEditClick = (project: Project) => {
+    setProjectToEdit(project);
+  }
 
   const handleConfirmDelete = async () => {
     if (projectToDelete) {
@@ -127,7 +134,7 @@ export function ProjectsTable() {
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end">
                     <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                    <DropdownMenuItem>Edit</DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => handleEditClick(project)}>Edit</DropdownMenuItem>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem
                       className="text-destructive focus:bg-destructive/10 focus:text-destructive"
@@ -163,6 +170,23 @@ export function ProjectsTable() {
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
+
+      <Dialog open={!!projectToEdit} onOpenChange={() => setProjectToEdit(null)}>
+        <DialogContent className="sm:max-w-[625px]">
+            <DialogHeader>
+            <DialogTitle>Edit Project</DialogTitle>
+            <DialogDescription>
+                Update the details for the project "{projectToEdit?.title}".
+            </DialogDescription>
+            </DialogHeader>
+            <ScrollArea className="max-h-[70vh] p-4">
+                <ProjectForm 
+                    projectToEdit={projectToEdit}
+                    onFinished={() => setProjectToEdit(null)}
+                />
+            </ScrollArea>
+        </DialogContent>
+      </Dialog>
     </>
   );
 }
