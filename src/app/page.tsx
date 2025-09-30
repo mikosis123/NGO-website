@@ -1,5 +1,4 @@
 
-
 'use client'
 
 import Image from 'next/image';
@@ -209,8 +208,8 @@ export default function Home() {
                         </CarouselItem>
                     ))}
                 </CarouselContent>
-                <CarouselPrevious className="border-accent bg-white text-accent hover:bg-accent hover:text-accent-foreground" />
-                <CarouselNext className="border-accent bg-white text-accent hover:bg-accent hover:text-accent-foreground" />
+                <CarouselPrevious className="border-accent bg-white text-accent hover:bg-accent hover:text-accent-foreground hidden md:flex" />
+                <CarouselNext className="border-accent bg-white text-accent hover:bg-accent hover:text-accent-foreground hidden md:flex" />
             </Carousel>
         </div>
       </motion.section>
