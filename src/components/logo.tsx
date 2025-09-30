@@ -1,6 +1,7 @@
 import { Leaf } from 'lucide-react';
 import Image from "next/image";
 import MainLogo from '@/components/logo1.png';
+import { Separator } from './ui/separator';
 
 export function Logo({ className }: { className?: string }) {
   return (
@@ -11,7 +12,11 @@ export function Logo({ className }: { className?: string }) {
         width={80}
         height={80}
       />
-      <span className="ml-2 text-lg font-bold text-foreground">Light for Generation Ethiopia</span>
+      <Separator orientation='vertical' className='h-12 mx-3 bg-foreground/50' />
+      <div className="flex flex-col">
+        <span className="text-lg font-bold text-foreground leading-tight">Light for Generation</span>
+        <span className="text-lg font-bold text-foreground leading-tight">Ethiopia</span>
+      </div>
     </div>
   );
 }
