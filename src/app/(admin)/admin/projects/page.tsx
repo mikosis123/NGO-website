@@ -11,6 +11,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { ProjectForm } from "./project-form";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 
 export default function AdminProjectsPage() {
@@ -28,14 +29,16 @@ export default function AdminProjectsPage() {
                             Add Project
                         </Button>
                     </DialogTrigger>
-                    <DialogContent>
+                    <DialogContent className="sm:max-w-[625px]">
                         <DialogHeader>
                         <DialogTitle>Add a New Project</DialogTitle>
                         <DialogDescription>
                             Fill out the form below to create a new project.
                         </DialogDescription>
                         </DialogHeader>
-                        <ProjectForm />
+                        <ScrollArea className="max-h-[70vh] p-4">
+                            <ProjectForm />
+                        </ScrollArea>
                     </DialogContent>
                 </Dialog>
             </CardHeader>
