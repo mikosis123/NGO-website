@@ -24,7 +24,8 @@ const projectSchema = z.object({
   category: z.enum(['Agriculture', 'Youth', 'Environment', 'Health']),
   goals: z.string().min(1, "Please enter at least one goal."),
   beneficiaries: z.string().min(3, "Beneficiaries must be at least 3 characters."),
-  timeline: z.string().min(3, "Timeline must be at least 3 characters.")
+  timeline: z.string().min(3, "Timeline must be at least 3 characters."),
+  fundingProgress: z.coerce.number().min(0, "Progress must be at least 0.").max(100, "Progress cannot exceed 100."),
 });
 
 type ProjectFormValues = z.infer<typeof projectSchema>;
@@ -60,6 +61,7 @@ export function ProjectForm({ projectToEdit, onFinished }: ProjectFormProps) {
       goals: '',
       beneficiaries: '',
       timeline: '',
+      fundingProgress: 0,
     },
   });
 
@@ -80,6 +82,7 @@ export function ProjectForm({ projectToEdit, onFinished }: ProjectFormProps) {
         goals: '',
         beneficiaries: '',
         timeline: '',
+        fundingProgress: 0,
       });
     }
   }, [projectToEdit, form]);
@@ -224,6 +227,19 @@ export function ProjectForm({ projectToEdit, onFinished }: ProjectFormProps) {
               <FormLabel>Timeline</FormLabel>
               <FormControl>
                 <Input placeholder="e.g., 2022 - Present" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="fundingProgress"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Funding Progress (%)</FormLabel>
+              <FormControl>
+                <Input type="number" placeholder="e.g., 75" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>

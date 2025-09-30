@@ -61,9 +61,6 @@ export default function ProjectPage() {
     return null; 
   }
 
-  // Placeholder for funding progress
-  const fundingProgress = Math.floor(Math.random() * (85 - 40 + 1)) + 40;
-
   return (
     <div className="container mx-auto px-4 py-12 md:py-20 pt-32 md:pt-32">
       <div className="max-w-4xl mx-auto">
@@ -118,9 +115,9 @@ export default function ProjectPage() {
                     <div className="mb-4">
                         <div className="flex justify-between items-center mb-1">
                             <span className="text-sm font-medium text-muted-foreground">Funding Progress</span>
-                            <span className="text-sm font-bold text-primary">{fundingProgress}%</span>
+                            <span className="text-sm font-bold text-primary">{project.fundingProgress}%</span>
                         </div>
-                        <Progress value={fundingProgress} className="h-3" />
+                        <Progress value={project.fundingProgress} className="h-3" />
                     </div>
                     <Button asChild size="lg" className="w-full bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-500 hover:to-blue-600 text-white">
                         <Link href="/donate">

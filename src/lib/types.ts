@@ -16,6 +16,7 @@ export type Project = {
   goals: string[];
   beneficiaries: string;
   timeline: string;
+  fundingProgress: number;
   createdAt: Date;
 };
 

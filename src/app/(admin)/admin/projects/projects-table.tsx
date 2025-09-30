@@ -52,6 +52,7 @@ export function ProjectsTable() {
           imageUrl: data.imageUrl,
           imageHint: data.imageHint,
           goals: data.goals,
+          fundingProgress: data.fundingProgress,
         });
       });
       setProjects(projectsData);
