@@ -17,6 +17,7 @@ export function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
+  const isAdminPage = pathname.startsWith('/admin');
 
   useEffect(() => {
     const handleScroll = () => {
@@ -26,11 +27,18 @@ export function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  if (isAdminPage) {
+    return null;
+  }
+
   return (
     <header className={cn(
-        "fixed top-0 left-1/2 -translate-x-1/2 z-50 w-[85%] transition-all duration-300 rounded-lg",
-        scrolled ? "border-b bg-white" : "bg-white",
-        "mt-4"
+        "fixed top-0 z-50 transition-all duration-300",
+        isAdminPage 
+            ? "w-full border-b bg-background" 
+            : "left-1/2 -translate-x-1/2 w-[85%] rounded-lg mt-4",
+        scrolled || isAdminPage ? "border-b bg-white" : "bg-white",
+        !isAdminPage && "mt-4"
     )}>
       <div className="container flex h-20 items-center px-4">
         <Link href="/" className="flex items-center space-x-2">
