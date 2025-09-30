@@ -14,6 +14,7 @@ export const navLinks: NavLink[] = [
   { href: '/projects', label: 'Projects' },
   { href: '/news', label: 'News' },
   { href: '/gallery', label: 'Gallery' },
+  { href: '/resources', label: 'Resources' },
   { href: '/contact', label: 'Contact' },
 ];
 
@@ -264,6 +265,8 @@ export const mockResources: Resource[] = [
     icon: FileText,
   },
 ];
+    
+
     
 
     
