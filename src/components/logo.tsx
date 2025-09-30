@@ -4,14 +4,14 @@ import MainLogo from '@/components/logo1.png';
 
 export function Logo({ className }: { className?: string }) {
   return (
-    <div className={`flex items-center font-headline`}>
-      {/* <Leaf className="h-6 w-6 mr-2 text-primary" /> */}
+    <div className={`flex items-center font-headline ${className}`}>
       <Image 
-        src={MainLogo}   // path inside public/
+        src={MainLogo}
         alt="LFG Logo"
         width={80}
         height={80}
       />
+      <span className="ml-2 text-lg font-bold text-foreground">Light for Generation Ethiopia</span>
     </div>
   );
 }
