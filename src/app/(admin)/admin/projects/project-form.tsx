@@ -9,6 +9,8 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { toast } from '@/hooks/use-toast';
+import { db } from '@/lib/firebase';
+import { addDoc, collection } from 'firebase/firestore';
 
 const projectSchema = z.object({
   title: z.string().min(3, 'Title must be at least 3 characters.'),
@@ -30,15 +32,26 @@ export function ProjectForm() {
     },
   });
 
-  function onSubmit(data: ProjectFormValues) {
-    toast({
-      title: "Project Created!",
-      description: `The project "${data.title}" has been successfully created.`,
-    });
-    console.log(data);
-    // Here you would typically call an API to save the data
-    form.reset();
-    // Potentially close the dialog after submission
+  async function onSubmit(data: ProjectFormValues) {
+    try {
+      const docRef = await addDoc(collection(db, "projects"), {
+        ...data,
+        createdAt: new Date(),
+      });
+      toast({
+        title: "Project Created!",
+        description: `The project "${data.title}" has been successfully created.`,
+      });
+      console.log("Document written with ID: ", docRef.id);
+      form.reset();
+    } catch (error) {
+      console.error("Error adding document: ", error);
+      toast({
+        title: "Error",
+        description: "There was an error creating the project. Please try again.",
+        variant: "destructive",
+      });
+    }
   }
 
   return (
