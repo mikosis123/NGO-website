@@ -8,6 +8,8 @@ import { cn } from '@/lib/utils';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Project } from '@/lib/types';
+import { Skeleton } from '../ui/skeleton';
+import { Card, CardContent, CardHeader } from '../ui/card';
 
 type FilterControlsProps = {
   categories: string[];
@@ -16,6 +18,25 @@ type FilterControlsProps = {
 };
 
 const PROJECTS_PER_PAGE = 4;
+
+function ProjectCardSkeleton() {
+    return (
+        <Card className="flex flex-col h-full overflow-hidden">
+            <CardHeader className="p-0 relative h-48">
+                <Skeleton className="h-full w-full" />
+            </CardHeader>
+            <CardContent className="flex-grow p-4">
+                <Skeleton className="h-4 w-1/4 mb-2" />
+                <Skeleton className="h-6 w-3/4 mb-2" />
+                <Skeleton className="h-4 w-full" />
+                <Skeleton className="h-4 w-5/6 mt-1" />
+            </CardContent>
+            <div className="p-4 pt-0">
+                <Skeleton className="h-5 w-24" />
+            </div>
+        </Card>
+    )
+}
 
 export default function FilterControls({ categories, projects, loading }: FilterControlsProps) {
   const [activeCategory, setActiveCategory] = useState('All');
@@ -62,7 +83,18 @@ export default function FilterControls({ categories, projects, loading }: Filter
       </div>
 
       {loading ? (
-        <p className="text-center">Loading projects...</p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-8">
+            {[...Array(PROJECTS_PER_PAGE)].map((_, i) => (
+                 <motion.div
+                    key={i}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: i * 0.1 }}
+                >
+                    <ProjectCardSkeleton />
+                </motion.div>
+            ))}
+        </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-8">
             {currentProjects.map((project, i) => (
@@ -79,7 +111,7 @@ export default function FilterControls({ categories, projects, loading }: Filter
       )}
 
 
-      {totalPages > 1 && (
+      {totalPages > 1 && !loading && (
         <div className="flex justify-center items-center gap-4 mt-12">
             <Button
             variant="outline"
