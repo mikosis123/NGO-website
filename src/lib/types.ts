@@ -29,6 +29,7 @@ export type NewsArticle = {
   imageUrl: string;
   imageHint: string;
   date: string;
+  createdAt: Date;
 };
 
 export type TeamMember = {

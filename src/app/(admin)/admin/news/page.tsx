@@ -11,6 +11,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { NewsForm } from "./news-form";
+import { NewsTable } from "./news-table";
 
 
 export default function AdminNewsPage() {
@@ -40,7 +41,7 @@ export default function AdminNewsPage() {
                 </Dialog>
             </CardHeader>
             <CardContent>
-                <p>A table of news articles will be displayed here, with options to create and edit.</p>
+                <NewsTable />
             </CardContent>
         </Card>
     )
