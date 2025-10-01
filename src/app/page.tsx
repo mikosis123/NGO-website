@@ -10,7 +10,6 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import ImpactCounters from '@/components/homepage/impact-counters';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
-import { mockNews } from '@/lib/mock-data';
 import ProjectCard from '@/components/projects/project-card';
 import { ArrowRight, Quote, Heart } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -23,7 +22,7 @@ import {
 } from "@/components/ui/carousel"
 import ArticleCard from '@/components/news/article-card';
 import React, { useEffect, useState } from 'react';
-import { Project } from '@/lib/types';
+import { Project, NewsArticle } from '@/lib/types';
 import { collection, getDocs, limit, orderBy, query } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 
@@ -74,32 +73,30 @@ const sectionVariants = {
 export default function Home() {
   const heroImage = PlaceHolderImages.find(p => p.id === 'hero-community');
   const [featuredProjects, setFeaturedProjects] = useState<Project[]>([]);
-  const latestNews = mockNews.slice(0, 2);
+  const [latestNews, setLatestNews] = useState<NewsArticle[]>([]);
   const plugin = React.useRef(
     Autoplay({ delay: 2000, stopOnInteraction: true })
   )
 
   useEffect(() => {
-    const fetchProjects = async () => {
+    const fetchData = async () => {
         try {
-            const q = query(collection(db, 'projects'), orderBy('createdAt', 'desc'), limit(2));
-            const querySnapshot = await getDocs(q);
-            const projectsData: Project[] = [];
-            querySnapshot.forEach((doc) => {
-                const data = doc.data();
-                projectsData.push({
-                    id: doc.id,
-                    ...data,
-                    createdAt: data.createdAt.toDate(),
-                } as Project);
-            });
+            const projectsQuery = query(collection(db, 'projects'), orderBy('createdAt', 'desc'), limit(2));
+            const projectsSnapshot = await getDocs(projectsQuery);
+            const projectsData: Project[] = projectsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Project));
             setFeaturedProjects(projectsData);
+
+            const newsQuery = query(collection(db, 'news'), orderBy('createdAt', 'desc'), limit(2));
+            const newsSnapshot = await getDocs(newsQuery);
+            const newsData: NewsArticle[] = newsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as NewsArticle));
+            setLatestNews(newsData);
+
         } catch (error) {
-            console.error("Error fetching featured projects:", error);
+            console.error("Error fetching homepage data:", error);
         }
     };
 
-    fetchProjects();
+    fetchData();
 }, []);
 
   return (
