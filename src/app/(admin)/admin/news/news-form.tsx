@@ -15,6 +15,7 @@ const newsSchema = z.object({
   excerpt: z.string().min(10, 'Excerpt must be at least 10 characters.'),
   content: z.string().min(50, 'Content must be at least 50 characters.'),
   imageUrl: z.string().url('Please enter a valid image URL.'),
+  imageHint: z.string().min(2, 'Image hint must be at least 2 characters.'),
 });
 
 type NewsFormValues = z.infer<typeof newsSchema>;
@@ -27,6 +28,7 @@ export function NewsForm() {
       excerpt: '',
       content: '',
       imageUrl: '',
+      imageHint: '',
     },
   });
 
@@ -89,6 +91,19 @@ export function NewsForm() {
               <FormLabel>Featured Image URL</FormLabel>
               <FormControl>
                 <Input placeholder="https://example.com/image.jpg" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="imageHint"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Image Hint</FormLabel>
+              <FormControl>
+                <Input placeholder="e.g., 'children drinking water'" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
