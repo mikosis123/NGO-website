@@ -35,7 +35,6 @@ const adminNavLinks = [
   { href: '/admin/projects', label: 'Projects', icon: Briefcase },
   { href: '/admin/news', label: 'News', icon: Newspaper },
   { href: '/admin/gallery', label: 'Gallery', icon: GalleryIcon },
-  { href: '/admin/events', label: 'Events', icon: Calendar },
   { href: '/admin/resources', label: 'Resources', icon: FolderUp },
   { href: '/admin/donations', label: 'Donations', icon: HandCoins },
   { href: '/admin/inbox', label: 'Inbox', icon: Mail },
