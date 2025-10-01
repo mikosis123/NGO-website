@@ -9,6 +9,8 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { toast } from '@/hooks/use-toast';
+import { db } from '@/lib/firebase';
+import { addDoc, collection } from 'firebase/firestore';
 
 const newsSchema = z.object({
   title: z.string().min(3, 'Title must be at least 3 characters.'),
@@ -19,6 +21,15 @@ const newsSchema = z.object({
 });
 
 type NewsFormValues = z.infer<typeof newsSchema>;
+
+function slugify(text: string) {
+  return text.toString().toLowerCase()
+    .replace(/\s+/g, '-')           // Replace spaces with -
+    .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
+    .replace(/\-\-+/g, '-')         // Replace multiple - with single -
+    .replace(/^-+/, '')             // Trim - from start of text
+    .replace(/-+$/, '');            // Trim - from end of text
+}
 
 export function NewsForm() {
   const form = useForm<NewsFormValues>({
@@ -32,13 +43,31 @@ export function NewsForm() {
     },
   });
 
-  function onSubmit(data: NewsFormValues) {
-    toast({
-      title: "Article Created!",
-      description: `The article "${data.title}" has been successfully created.`,
-    });
-    console.log(data);
-    form.reset();
+  async function onSubmit(data: NewsFormValues) {
+    try {
+      const submissionData = {
+          ...data,
+          slug: slugify(data.title),
+          date: new Date().toISOString(),
+          createdAt: new Date(),
+      }
+
+      const docRef = await addDoc(collection(db, "news"), submissionData);
+      
+      toast({
+        title: "Article Created!",
+        description: `The article "${data.title}" has been successfully created.`,
+      });
+      console.log("Document written with ID: ", docRef.id);
+      form.reset();
+    } catch (error) {
+       console.error("Error adding document: ", error);
+       toast({
+        title: "Error",
+        description: "There was an error creating the article. Please try again.",
+        variant: "destructive",
+      });
+    }
   }
 
   return (
