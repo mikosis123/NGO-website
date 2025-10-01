@@ -8,7 +8,9 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { toast } from '@/hooks/use-toast';
-import { Card, CardContent } from '../ui/card';
+import { db } from '@/lib/firebase';
+import { addDoc, collection } from 'firebase/firestore';
+import { useState } from 'react';
 
 const contactSchema = z.object({
   name: z.string().min(2, 'Name is required.'),
@@ -20,6 +22,7 @@ const contactSchema = z.object({
 type ContactFormValues = z.infer<typeof contactSchema>;
 
 export default function ContactForm() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const form = useForm<ContactFormValues>({
     resolver: zodResolver(contactSchema),
     defaultValues: {
@@ -30,12 +33,30 @@ export default function ContactForm() {
     },
   });
 
-  function onSubmit(data: ContactFormValues) {
-    toast({
-      title: "Message Sent!",
-      description: `Thank you, ${data.name}. We've received your message and will get back to you shortly.`,
-    });
-    form.reset();
+  async function onSubmit(data: ContactFormValues) {
+    setIsSubmitting(true);
+    try {
+      await addDoc(collection(db, "contacts"), {
+        ...data,
+        createdAt: new Date(),
+        read: false,
+      });
+
+      toast({
+        title: "Message Sent!",
+        description: `Thank you, ${data.name}. We've received your message and will get back to you shortly.`,
+      });
+      form.reset();
+    } catch (error) {
+      console.error("Error sending message:", error);
+      toast({
+        title: "Error",
+        description: "There was an error sending your message. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+        setIsSubmitting(false);
+    }
   }
 
   return (
@@ -93,8 +114,8 @@ export default function ContactForm() {
             </FormItem>
           )}
         />
-        <Button type="submit" className="w-full bg-accent hover:bg-accent/90 text-accent-foreground" size="lg">
-          Send Message
+        <Button type="submit" className="w-full bg-accent hover:bg-accent/90 text-accent-foreground" size="lg" disabled={isSubmitting}>
+          {isSubmitting ? 'Sending...' : 'Send Message'}
         </Button>
       </form>
     </Form>

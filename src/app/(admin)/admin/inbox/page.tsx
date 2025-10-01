@@ -1,7 +1,7 @@
 
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
@@ -13,57 +13,51 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { collection, doc, onSnapshot, orderBy, query, updateDoc } from 'firebase/firestore';
+import { db } from '@/lib/firebase';
+import { format } from 'date-fns';
 
-const initialMessages = [
-    {
-        id: "1",
-        name: "Jane Doe",
-        email: "jane.doe@example.com",
-        subject: "Volunteering Inquiry",
-        message: "I'm interested in volunteering for your upcoming tree planting event. Can you provide more details?",
-        date: "2024-07-28",
-        read: false,
-    },
-    {
-        id: "2",
-        name: "John Smith",
-        email: "john.smith@example.com",
-        subject: "Donation Question",
-        message: "I'd like to make a donation in honor of a loved one. How can I do that?",
-        date: "2024-07-27",
-        read: true,
-    },
-    {
-        id: "3",
-        name: "Maria Garcia",
-        email: "maria.g@example.com",
-        subject: "Partnership Proposal",
-        message: "My company is interested in exploring a corporate partnership with your organization. Who should I speak with?",
-        date: "2024-07-27",
-        read: true,
-    },
-     {
-        id: "4",
-        name: "Chen Wei",
-        email: "chen.wei@example.com",
-        subject: "Question about your projects",
-        message: "I was reading about your sustainable farming initiative and had a few questions about the impact.",
-        date: "2024-07-26",
-        read: true,
-    }
-]
+type Message = {
+    id: string;
+    name: string;
+    email: string;
+    subject: string;
+    message: string;
+    createdAt: Date;
+    read: boolean;
+}
 
 export default function AdminInboxPage() {
-    const [messages, setMessages] = useState(initialMessages);
-    const [selectedMessage, setSelectedMessage] = useState<(typeof initialMessages[0]) | null>(null);
+    const [messages, setMessages] = useState<Message[]>([]);
+    const [selectedMessage, setSelectedMessage] = useState<Message | null>(null);
+    const [loading, setLoading] = useState(true);
 
-    const handleRowClick = (message: typeof initialMessages[0]) => {
+    useEffect(() => {
+        const q = query(collection(db, 'contacts'), orderBy('createdAt', 'desc'));
+        const unsubscribe = onSnapshot(q, (snapshot) => {
+            const messagesData = snapshot.docs.map(doc => {
+                const data = doc.data();
+                return {
+                    id: doc.id,
+                    ...data,
+                    createdAt: data.createdAt.toDate(),
+                } as Message;
+            });
+            setMessages(messagesData);
+            setLoading(false);
+        }, (error) => {
+            console.error("Error fetching messages: ", error);
+            setLoading(false);
+        });
+        return () => unsubscribe();
+    }, []);
+
+    const handleRowClick = async (message: Message) => {
         setSelectedMessage(message);
-        setMessages(prevMessages => 
-            prevMessages.map(m => 
-                m.id === message.id ? { ...m, read: true } : m
-            )
-        );
+        if (!message.read) {
+            const docRef = doc(db, "contacts", message.id);
+            await updateDoc(docRef, { read: true });
+        }
     };
 
     return (
@@ -73,7 +67,7 @@ export default function AdminInboxPage() {
                 <CardDescription>View messages from your website's contact form.</CardDescription>
             </CardHeader>
             <CardContent>
-                <Dialog>
+                <Dialog onOpenChange={(open) => !open && setSelectedMessage(null)}>
                     <Table>
                         <TableHeader>
                             <TableRow>
@@ -88,24 +82,36 @@ export default function AdminInboxPage() {
                             </TableRow>
                         </TableHeader>
                         <TableBody>
-                            {messages.map(message => (
-                                <DialogTrigger asChild key={message.id}>
-                                    <TableRow 
-                                        onClick={() => handleRowClick(message)}
-                                        className={!message.read ? 'bg-secondary/50 font-bold cursor-pointer' : 'cursor-pointer'}
-                                    >
-                                        <TableCell className="hidden sm:table-cell">
-                                            {!message.read && <Badge variant="default">New</Badge>}
-                                        </TableCell>
-                                        <TableCell>
-                                            <div className="font-medium">{message.name}</div>
-                                            <div className="text-xs text-muted-foreground">{message.email}</div>
-                                        </TableCell>
-                                        <TableCell>{message.subject}</TableCell>
-                                        <TableCell className="hidden md:table-cell">{message.date}</TableCell>
-                                    </TableRow>
-                                </DialogTrigger>
-                            ))}
+                            {loading ? (
+                                <TableRow>
+                                    <TableCell colSpan={4} className="text-center">Loading messages...</TableCell>
+                                </TableRow>
+                            ) : messages.length === 0 ? (
+                                <TableRow>
+                                    <TableCell colSpan={4} className="text-center">No messages yet.</TableCell>
+                                </TableRow>
+                            ) : (
+                                messages.map(message => (
+                                    <DialogTrigger asChild key={message.id}>
+                                        <TableRow 
+                                            onClick={() => handleRowClick(message)}
+                                            className={!message.read ? 'bg-secondary/50 font-bold cursor-pointer' : 'cursor-pointer'}
+                                        >
+                                            <TableCell className="hidden sm:table-cell">
+                                                {!message.read && <Badge variant="default">New</Badge>}
+                                            </TableCell>
+                                            <TableCell>
+                                                <div className="font-medium">{message.name}</div>
+                                                <div className="text-xs text-muted-foreground">{message.email}</div>
+                                            </TableCell>
+                                            <TableCell>{message.subject}</TableCell>
+                                            <TableCell className="hidden md:table-cell">
+                                                {format(message.createdAt, 'PPp')}
+                                            </TableCell>
+                                        </TableRow>
+                                    </DialogTrigger>
+                                ))
+                            )}
                         </TableBody>
                     </Table>
                     {selectedMessage && (
@@ -115,10 +121,10 @@ export default function AdminInboxPage() {
                                 <DialogDescription>
                                     From: {selectedMessage.name} &lt;{selectedMessage.email}&gt;
                                     <br />
-                                    Received: {selectedMessage.date}
+                                    Received: {format(selectedMessage.createdAt, 'PPp')}
                                 </DialogDescription>
                             </DialogHeader>
-                            <div className="prose prose-sm mt-4">
+                            <div className="prose prose-sm mt-4 max-w-full">
                                 <p>{selectedMessage.message}</p>
                             </div>
                         </DialogContent>
