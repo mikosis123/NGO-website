@@ -63,11 +63,25 @@ export function NewsForm({ articleToEdit, onFinished }: NewsFormProps) {
       });
     }
   }, [articleToEdit, form]);
+  
+  const transformGoogleDriveLink = (url: string): string => {
+    const googleDriveRegex = /drive\.google\.com\/file\/d\/([a-zA-Z0-9_-]+)/;
+    const match = url.match(googleDriveRegex);
+
+    if (match && match[1]) {
+      const fileId = match[1];
+      return `https://drive.google.com/uc?export=view&id=${fileId}`;
+    }
+
+    return url;
+  };
 
   async function onSubmit(data: NewsFormValues) {
     try {
+      const transformedUrl = transformGoogleDriveLink(data.imageUrl);
       const submissionData = {
           ...data,
+          imageUrl: transformedUrl,
           slug: slugify(data.title),
       }
 
