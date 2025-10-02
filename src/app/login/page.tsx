@@ -22,6 +22,7 @@ import { signInWithEmailAndPassword } from "firebase/auth"
 import { useAuth } from "@/firebase/provider"
 import { toast } from "@/hooks/use-toast"
 import { useRouter } from "next/navigation"
+import { Eye, EyeOff } from "lucide-react";
 
 const loginSchema = z.object({
   email: z.string().email('Invalid email address.'),
@@ -32,6 +33,7 @@ type LoginFormValues = z.infer<typeof loginSchema>;
 
 export default function LoginPage() {
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
     const auth = useAuth();
     const router = useRouter();
 
@@ -100,7 +102,31 @@ export default function LoginPage() {
                             <FormItem className="grid gap-2">
                                 <Label htmlFor="password">Password</Label>
                                 <FormControl>
-                                    <Input id="password" type="password" required {...field} />
+                                    <div className="relative">
+                                        <Input
+                                            id="password"
+                                            type={showPassword ? "text" : "password"}
+                                            placeholder="••••••••"
+                                            required
+                                            {...field}
+                                        />
+                                        <Button
+                                            type="button"
+                                            variant="ghost"
+                                            size="icon"
+                                            className="absolute inset-y-0 right-0 h-full px-3 text-muted-foreground"
+                                            onClick={() => setShowPassword(!showPassword)}
+                                        >
+                                            {showPassword ? (
+                                                <EyeOff className="h-4 w-4" />
+                                            ) : (
+                                                <Eye className="h-4 w-4" />
+                                            )}
+                                            <span className="sr-only">
+                                                {showPassword ? 'Hide password' : 'Show password'}
+                                            </span>
+                                        </Button>
+                                    </div>
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
