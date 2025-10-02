@@ -36,12 +36,27 @@ export function GalleryForm({ onFinished }: GalleryFormProps) {
     },
   });
 
+  const transformGoogleDriveLink = (url: string): string => {
+    const googleDriveRegex = /drive\.google\.com\/file\/d\/([a-zA-Z0-9_-]+)/;
+    const match = url.match(googleDriveRegex);
+
+    if (match && match[1]) {
+      const fileId = match[1];
+      return `https://drive.google.com/uc?export=view&id=${fileId}`;
+    }
+
+    return url;
+  };
+
   async function onSubmit(data: GalleryFormValues) {
     setIsSubmitting(true);
     
     try {
+        const transformedUrl = transformGoogleDriveLink(data.imageUrl);
+
         await addDoc(collection(db, "gallery"), {
             ...data,
+            imageUrl: transformedUrl,
             createdAt: new Date(),
         });
 
