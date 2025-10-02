@@ -1,11 +1,75 @@
+'use client';
+
 import Link from 'next/link';
 import { Twitter, Facebook, Instagram, Linkedin } from 'lucide-react';
 import { Logo } from '@/components/logo';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { navLinks } from '@/lib/mock-data';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import * as z from 'zod';
+import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
+import { toast } from '@/hooks/use-toast';
+import { db } from '@/lib/firebase';
+import { addDoc, collection, query, where, getDocs } from 'firebase/firestore';
+import { useState } from 'react';
+
+const subscriptionSchema = z.object({
+  email: z.string().email('Please enter a valid email address.'),
+});
+
+type SubscriptionFormValues = z.infer<typeof subscriptionSchema>;
 
 export function Footer() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const form = useForm<SubscriptionFormValues>({
+    resolver: zodResolver(subscriptionSchema),
+    defaultValues: {
+      email: '',
+    },
+  });
+
+  async function onSubmit(data: SubscriptionFormValues) {
+    setIsSubmitting(true);
+    try {
+      // Check if the email is already subscribed
+      const subscriptionsRef = collection(db, 'subscriptions');
+      const q = query(subscriptionsRef, where('email', '==', data.email));
+      const querySnapshot = await getDocs(q);
+
+      if (!querySnapshot.empty) {
+        toast({
+          title: 'Already Subscribed',
+          description: 'This email address is already on our mailing list.',
+          variant: 'default',
+        });
+        return;
+      }
+
+      // Add the new subscription
+      await addDoc(subscriptionsRef, {
+        email: data.email,
+        createdAt: new Date(),
+      });
+
+      toast({
+        title: 'Subscription Successful!',
+        description: `Thank you for subscribing! We've added ${data.email} to our mailing list.`,
+      });
+      form.reset();
+    } catch (error) {
+      console.error('Error subscribing:', error);
+      toast({
+        title: 'Subscription Failed',
+        description: 'An error occurred. Please try again.',
+        variant: 'destructive',
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  }
+
   return (
     <footer className="bg-background border-t">
       <div className="container py-12 px-4">
@@ -43,10 +107,25 @@ export function Footer() {
           <div>
             <h3 className="font-semibold mb-4 text-foreground">Stay Updated</h3>
             <p className="text-sm text-muted-foreground mb-2">Subscribe to our newsletter for the latest news and updates from Ethiopia.</p>
-            <form className="flex space-x-2">
-              <Input type="email" placeholder="Your email" className="bg-background" />
-              <Button type="submit" className="bg-primary text-primary-foreground hover:bg-primary/90">Subscribe</Button>
-            </form>
+            <Form {...form}>
+              <form onSubmit={form.handleSubmit(onSubmit)} className="flex space-x-2">
+                <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem className="flex-1">
+                      <FormControl>
+                        <Input type="email" placeholder="Your email" className="bg-background" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <Button type="submit" className="bg-primary text-primary-foreground hover:bg-primary/90" disabled={isSubmitting}>
+                  {isSubmitting ? 'Subscribing...' : 'Subscribe'}
+                </Button>
+              </form>
+            </Form>
           </div>
         </div>
         <div className="mt-8 pt-8 border-t text-center text-sm text-muted-foreground">
