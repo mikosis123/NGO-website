@@ -1,4 +1,6 @@
 
+'use client';
+
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -11,8 +13,54 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Logo } from "@/components/logo"
 import Link from "next/link"
+import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form"
+import { useForm } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
+import * as z from 'zod';
+import { useState } from "react"
+import { signInWithEmailAndPassword } from "firebase/auth"
+import { useAuth } from "@/firebase/provider"
+import { toast } from "@/hooks/use-toast"
+import { useRouter } from "next/navigation"
+
+const loginSchema = z.object({
+  email: z.string().email('Invalid email address.'),
+  password: z.string().min(6, 'Password must be at least 6 characters.'),
+});
+
+type LoginFormValues = z.infer<typeof loginSchema>;
 
 export default function LoginPage() {
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const auth = useAuth();
+    const router = useRouter();
+
+    const form = useForm<LoginFormValues>({
+        resolver: zodResolver(loginSchema),
+        defaultValues: {
+            email: '',
+            password: '',
+        },
+    });
+
+    async function onSubmit(data: LoginFormValues) {
+        setIsSubmitting(true);
+        try {
+            await signInWithEmailAndPassword(auth, data.email, data.password);
+            router.push('/admin');
+        } catch (error: any) {
+            console.error("Login Error:", error);
+            toast({
+                title: "Login Failed",
+                description: error.message || "An error occurred. Please try again.",
+                variant: "destructive",
+            });
+        } finally {
+            setIsSubmitting(false);
+        }
+    }
+
+
   return (
     <div className="flex items-center justify-center min-h-screen bg-secondary/50">
         <Card className="mx-auto max-w-sm">
@@ -24,29 +72,51 @@ export default function LoginPage() {
             </CardDescription>
         </CardHeader>
         <CardContent>
-            <div className="grid gap-4">
-            <div className="grid gap-2">
-                <Label htmlFor="email">Email</Label>
-                <Input
-                id="email"
-                type="email"
-                placeholder="m@example.com"
-                required
-                />
-            </div>
-            <div className="grid gap-2">
-                <div className="flex items-center">
-                <Label htmlFor="password">Password</Label>
-                <Link href="#" className="ml-auto inline-block text-sm underline">
-                    Forgot your password?
-                </Link>
-                </div>
-                <Input id="password" type="password" required />
-            </div>
-            <Button type="submit" className="w-full bg-accent text-accent-foreground hover:bg-accent/90">
-                Login
-            </Button>
-            </div>
+            <Form {...form}>
+                <form onSubmit={form.handleSubmit(onSubmit)} className="grid gap-4">
+                    <FormField
+                        control={form.control}
+                        name="email"
+                        render={({ field }) => (
+                            <FormItem className="grid gap-2">
+                                <Label htmlFor="email">Email</Label>
+                                <FormControl>
+                                    <Input
+                                        id="email"
+                                        type="email"
+                                        placeholder="m@example.com"
+                                        required
+                                        {...field}
+                                    />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                     <FormField
+                        control={form.control}
+                        name="password"
+                        render={({ field }) => (
+                            <FormItem className="grid gap-2">
+                                <div className="flex items-center">
+                                    <Label htmlFor="password">Password</Label>
+                                    <Link href="#" className="ml-auto inline-block text-sm underline">
+                                        Forgot your password?
+                                    </Link>
+                                </div>
+                                <FormControl>
+                                    <Input id="password" type="password" required {...field} />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+
+                    <Button type="submit" className="w-full bg-accent text-accent-foreground hover:bg-accent/90" disabled={isSubmitting}>
+                        {isSubmitting ? 'Logging in...' : 'Login'}
+                    </Button>
+                </form>
+            </Form>
         </CardContent>
         </Card>
     </div>
