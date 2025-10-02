@@ -15,8 +15,7 @@ import {
 import { GalleryForm } from "./gallery-form";
 import { useEffect, useState } from "react";
 import { collection, onSnapshot, orderBy, query, doc, deleteDoc } from "firebase/firestore";
-import { db, storage } from "@/lib/firebase";
-import { deleteObject, ref } from "firebase/storage";
+import { db } from "@/lib/firebase";
 import Image from "next/image";
 import {
   AlertDialog,
@@ -34,7 +33,6 @@ type GalleryImage = {
   id: string;
   imageUrl: string;
   description: string;
-  storagePath: string;
 }
 
 export default function AdminGalleryPage() {
@@ -65,10 +63,6 @@ export default function AdminGalleryPage() {
         try {
           // Delete from Firestore
           await deleteDoc(doc(db, "gallery", imageToDelete.id));
-
-          // Delete from Firebase Storage
-          const storageRef = ref(storage, imageToDelete.storagePath);
-          await deleteObject(storageRef);
 
           toast({
             title: "Image Deleted",

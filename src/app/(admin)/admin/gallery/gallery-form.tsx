@@ -5,18 +5,16 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { Button } from '@/components/ui/button';
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { toast } from '@/hooks/use-toast';
-import { db, storage } from '@/lib/firebase';
+import { db } from '@/lib/firebase';
 import { addDoc, collection } from 'firebase/firestore';
-import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { useState } from 'react';
 
 const gallerySchema = z.object({
-  image: z.instanceof(FileList)
-    .refine((files) => files?.length === 1, 'Image is required.'),
+  imageUrl: z.string().url('Please enter a valid image URL.'),
   description: z.string().min(10, 'Description must be at least 10 characters.'),
   imageHint: z.string().min(2, 'Image hint must be at least 2 characters.'),
 });
@@ -32,34 +30,18 @@ export function GalleryForm({ onFinished }: GalleryFormProps) {
   const form = useForm<GalleryFormValues>({
     resolver: zodResolver(gallerySchema),
     defaultValues: {
-      image: undefined,
+      imageUrl: '',
       description: '',
       imageHint: '',
     },
   });
-  const imageRef = form.register("image");
 
   async function onSubmit(data: GalleryFormValues) {
     setIsSubmitting(true);
-    const imageFile = data.image[0];
-    if (!imageFile) {
-        toast({ title: "No image selected", variant: 'destructive' });
-        setIsSubmitting(false);
-        return;
-    }
-
+    
     try {
-        // Upload image to Firebase Storage
-        const storageRef = ref(storage, `gallery/${Date.now()}_${imageFile.name}`);
-        const uploadResult = await uploadBytes(storageRef, imageFile);
-        const imageUrl = await getDownloadURL(uploadResult.ref);
-
-        // Save image metadata to Firestore
         await addDoc(collection(db, "gallery"), {
-            imageUrl,
-            description: data.description,
-            imageHint: data.imageHint,
-            storagePath: storageRef.fullPath,
+            ...data,
             createdAt: new Date(),
         });
 
@@ -87,14 +69,13 @@ export function GalleryForm({ onFinished }: GalleryFormProps) {
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
         <FormField
           control={form.control}
-          name="image"
+          name="imageUrl"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Image File</FormLabel>
+              <FormLabel>Image URL</FormLabel>
               <FormControl>
-                <Input type="file" accept="image/*" {...imageRef} />
+                <Input placeholder="https://example.com/image.jpg" {...field} />
               </FormControl>
-              <FormDescription>Select an image to upload.</FormDescription>
               <FormMessage />
             </FormItem>
           )}
