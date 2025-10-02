@@ -8,7 +8,6 @@ import {
   Calendar,
   FolderUp,
   HandCoins,
-  Users,
   Mail,
   Briefcase,
   PanelLeft,
@@ -43,7 +42,6 @@ const adminNavLinks = [
   { href: '/admin/resources', label: 'Resources', icon: FolderUp },
   { href: '/admin/donations', label: 'Donations', icon: HandCoins },
   { href: '/admin/inbox', label: 'Inbox', icon: Mail },
-  { href: '/admin/users', label: 'Users', icon: Users },
 ];
 
 export function AdminSidebar() {
