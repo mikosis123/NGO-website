@@ -13,6 +13,7 @@ import {
   PanelLeft,
   Image as GalleryIcon,
   LogOut,
+  Users,
 } from 'lucide-react';
 import {
   Sidebar,
@@ -42,6 +43,7 @@ const adminNavLinks = [
   { href: '/admin/resources', label: 'Resources', icon: FolderUp },
   { href: '/admin/donations', label: 'Donations', icon: HandCoins },
   { href: '/admin/inbox', label: 'Inbox', icon: Mail },
+  { href: '/admin/subscribers', label: 'Subscribers', icon: Users },
 ];
 
 export function AdminSidebar() {
