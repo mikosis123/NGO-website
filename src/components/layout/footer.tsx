@@ -51,6 +51,7 @@ export function Footer() {
       await addDoc(subscriptionsRef, {
         email: data.email,
         createdAt: new Date(),
+        read: false,
       });
 
       toast({

@@ -9,6 +9,7 @@ import {
   query,
   deleteDoc,
   doc,
+  updateDoc,
 } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 import {
@@ -53,6 +54,7 @@ type Subscriber = {
   id: string;
   email: string;
   createdAt: Date;
+  read: boolean;
 };
 
 export default function SubscribersPage() {
@@ -72,6 +74,7 @@ export default function SubscribersPage() {
             id: doc.id,
             email: data.email,
             createdAt: data.createdAt.toDate(),
+            read: data.read ?? true, // Assume read if field doesn't exist
           });
         });
         setSubscribers(subscribersData);
@@ -90,6 +93,13 @@ export default function SubscribersPage() {
 
     return () => unsubscribe();
   }, []);
+
+  const handleRowClick = async (subscriber: Subscriber) => {
+    if (!subscriber.read) {
+        const docRef = doc(db, "subscriptions", subscriber.id);
+        await updateDoc(docRef, { read: true });
+    }
+  };
 
   const handleDeleteClick = (subscriber: Subscriber) => {
     setSubscriberToDelete(subscriber);
@@ -116,10 +126,6 @@ export default function SubscribersPage() {
     }
   };
 
-  const isNew = (date: Date) => {
-    const twentyFourHoursAgo = new Date(Date.now() - 24 * 60 * 60 * 1000);
-    return date > twentyFourHoursAgo;
-  };
 
   return (
     <>
@@ -156,11 +162,15 @@ export default function SubscribersPage() {
                 </TableRow>
               ) : (
                 subscribers.map((subscriber) => (
-                  <TableRow key={subscriber.id}>
+                  <TableRow 
+                    key={subscriber.id} 
+                    onClick={() => handleRowClick(subscriber)}
+                    className={!subscriber.read ? 'bg-secondary/50 font-bold cursor-pointer' : 'cursor-pointer'}
+                  >
                     <TableCell className="font-medium">
                       <div className="flex items-center gap-2">
                         {subscriber.email}
-                        {isNew(subscriber.createdAt) && <Badge>New</Badge>}
+                        {!subscriber.read && <Badge>New</Badge>}
                       </div>
                     </TableCell>
                     <TableCell>{format(subscriber.createdAt, 'PPp')}</TableCell>
@@ -176,7 +186,10 @@ export default function SubscribersPage() {
                           <DropdownMenuLabel>Actions</DropdownMenuLabel>
                           <DropdownMenuItem
                             className="text-destructive focus:bg-destructive/10 focus:text-destructive"
-                            onClick={() => handleDeleteClick(subscriber)}
+                            onClick={(e) => {
+                                e.stopPropagation(); // prevent row click
+                                handleDeleteClick(subscriber)
+                            }}
                           >
                             <Trash2 className="mr-2 h-4 w-4" />
                             Delete
