@@ -49,6 +49,8 @@ import {
 } from '@/components/ui/alert-dialog';
 import { toast } from '@/hooks/use-toast';
 import { Badge } from '@/components/ui/badge';
+import { Switch } from '@/components/ui/switch';
+import { Label } from '@/components/ui/label';
 
 type Subscriber = {
   id: string;
@@ -61,6 +63,7 @@ export default function SubscribersPage() {
   const [subscribers, setSubscribers] = useState<Subscriber[]>([]);
   const [loading, setLoading] = useState(true);
   const [subscriberToDelete, setSubscriberToDelete] = useState<Subscriber | null>(null);
+  const [showOnlyNew, setShowOnlyNew] = useState(false);
 
   useEffect(() => {
     const q = query(collection(db, 'subscriptions'), orderBy('createdAt', 'desc'));
@@ -126,15 +129,28 @@ export default function SubscribersPage() {
     }
   };
 
+  const filteredSubscribers = showOnlyNew
+    ? subscribers.filter(s => !s.read)
+    : subscribers;
 
   return (
     <>
       <Card>
-        <CardHeader>
-          <CardTitle>Newsletter Subscribers</CardTitle>
-          <CardDescription>
-            A list of users subscribed to your newsletter.
-          </CardDescription>
+        <CardHeader className="flex flex-row items-center justify-between">
+            <div>
+                <CardTitle>Newsletter Subscribers</CardTitle>
+                <CardDescription>
+                    A list of users subscribed to your newsletter.
+                </CardDescription>
+            </div>
+            <div className="flex items-center space-x-2">
+                <Switch
+                    id="show-new"
+                    checked={showOnlyNew}
+                    onCheckedChange={setShowOnlyNew}
+                />
+                <Label htmlFor="show-new">Show only new</Label>
+            </div>
         </CardHeader>
         <CardContent>
           <Table>
@@ -154,14 +170,14 @@ export default function SubscribersPage() {
                     Loading subscribers...
                   </TableCell>
                 </TableRow>
-              ) : subscribers.length === 0 ? (
+              ) : filteredSubscribers.length === 0 ? (
                 <TableRow>
                   <TableCell colSpan={3} className="text-center">
-                    No subscribers yet.
+                    {showOnlyNew ? 'No new subscribers.' : 'No subscribers yet.'}
                   </TableCell>
                 </TableRow>
               ) : (
-                subscribers.map((subscriber) => (
+                filteredSubscribers.map((subscriber) => (
                   <TableRow 
                     key={subscriber.id} 
                     onClick={() => handleRowClick(subscriber)}
