@@ -1,14 +1,9 @@
 import ContactForm from "@/components/contact/contact-form";
-import Map from "@/components/contact/map";
 import { Mail, Phone, MapPin, Twitter, Facebook, Instagram } from "lucide-react";
 import Link from "next/link";
 import { Card } from "@/components/ui/card";
 
 export default function ContactPage() {
-  const location = {
-    lat: 34.052235,
-    lng: -118.243683,
-  };
 
   return (
     <>
@@ -30,7 +25,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <h3 className="font-semibold text-lg">Our Office</h3>
-                  <p className="text-muted-foreground">123 Charity Lane, Hope City, 90210, USA</p>
+                  <p className="text-muted-foreground">Bole Sub-city, Woreda 05, House No. 067, Addis Ababa, Ethiopia</p>
                 </div>
               </div>
               <div className="flex items-start gap-4">
@@ -67,7 +62,15 @@ export default function ContactPage() {
         </Card>
       </div>
       <div className="w-full h-[400px] md:h-[500px] bg-muted">
-        <Map center={location} />
+        <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d11581.60678025526!2d38.755261038509914!3d8.973757912528908!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2set!4v1759567939011!5m2!1sen!2set" 
+            width="100%" 
+            height="100%" 
+            style={{border:0}} 
+            allowFullScreen={true} 
+            loading="lazy" 
+            referrerPolicy="no-referrer-when-downgrade">
+        </iframe>
       </div>
     </>
   );
