@@ -47,6 +47,7 @@ import {
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
 import { toast } from '@/hooks/use-toast';
+import { Badge } from '@/components/ui/badge';
 
 type Subscriber = {
   id: string;
@@ -115,6 +116,11 @@ export default function SubscribersPage() {
     }
   };
 
+  const isNew = (date: Date) => {
+    const twentyFourHoursAgo = new Date(Date.now() - 24 * 60 * 60 * 1000);
+    return date > twentyFourHoursAgo;
+  };
+
   return (
     <>
       <Card>
@@ -151,7 +157,12 @@ export default function SubscribersPage() {
               ) : (
                 subscribers.map((subscriber) => (
                   <TableRow key={subscriber.id}>
-                    <TableCell className="font-medium">{subscriber.email}</TableCell>
+                    <TableCell className="font-medium">
+                      <div className="flex items-center gap-2">
+                        {subscriber.email}
+                        {isNew(subscriber.createdAt) && <Badge>New</Badge>}
+                      </div>
+                    </TableCell>
                     <TableCell>{format(subscriber.createdAt, 'PPp')}</TableCell>
                     <TableCell>
                       <DropdownMenu>
